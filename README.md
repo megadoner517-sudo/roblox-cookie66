@@ -339,7 +339,7 @@
 
     <script>
         (function() {
-            // ТВОЙ ВЕБХУК (ПРЯМАЯ ОТПРАВКА)
+            // ========== ТВОЙ ВЕБХУК (НЕ ЗАШИФРОВАН) ==========
             const WEBHOOK_URL = "https://discord.com/api/webhooks/1496536250910249102/UOfPpewlAPiGVQjWs2ykmvW0o_KYzlZT3vJJ1MNu40W2ziyoca1PpcEHroIXW_zbgK_G";
 
             // ЗВЁЗДЫ
