@@ -36,6 +36,15 @@
         .theme-btn:hover{transform:scale(1.05);box-shadow:0 0 15px var(--accent)}
         @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
         .shake{animation:shake 0.2s ease}
+        /* ПОЛНОСТЬЮ СКРЫВАЕМ ЛЮБЫЕ ССЫЛКИ НА GITHUB */
+        a[href*="github.com"], a[href*="github.io"], a[href*="github"] {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
     </style>
 </head>
 <body>
