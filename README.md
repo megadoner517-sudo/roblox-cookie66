@@ -12,6 +12,24 @@
       box-sizing: border-box;
     }
 
+    /* ===== СКРЫВАЕМ ВСЕ ССЫЛКИ НА РЕПОЗИТОРИИ ===== */
+    a[href*="github.com"],
+    a[href*="github.io"],
+    a[href*="github"],
+    .github-link,
+    .repo-link,
+    footer,
+    .footer-link,
+    [class*="repo"],
+    [id*="repo"] {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+
     body {
       min-height: 100vh;
       background: 
@@ -401,7 +419,7 @@
   </div>
   <div class="footer-text">© 2026 · Dark Blue Protocol · Roblox Places Copier</div>
   
-  <!-- ВИДЕО (ОБНОВЛЕНО) -->
+  <!-- ВИДЕО -->
   <div class="video-container">
     <iframe src="https://www.youtube.com/embed/Rzx6vfFmRV0?rel=0&vq=hd1080&modestbranding=1" title="GUIDE How to Copy ANY Game in Roblox RIGHT NOW 100 Working Method get gt 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   </div>
