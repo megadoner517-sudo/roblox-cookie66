@@ -1,383 +1,400 @@
-
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>✦ DARK BLUE · PLACES COPIER ✦</title>
-  <style>
-    /* ===== СБРОС И БАЗА ===== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✦ PLACES COPIER ✦</title>
+    <style>
+        /* ===== СБРОС И БАЗА ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      min-height: 100vh;
-      background: 
-        radial-gradient(ellipse at 50% 30%, rgba(0, 60, 180, 0.25) 0%, rgba(0, 0, 0, 0.8) 90%),
-        radial-gradient(circle at 20% 50%, rgba(0, 100, 255, 0.12) 0%, transparent 60%),
-        radial-gradient(circle at 80% 70%, rgba(0, 80, 220, 0.08) 0%, transparent 65%),
-        repeating-linear-gradient(0deg, rgba(0, 100, 255, 0.10) 0px, rgba(0, 100, 255, 0.10) 1px, transparent 1px, transparent 55px),
-        repeating-linear-gradient(90deg, rgba(0, 100, 255, 0.10) 0px, rgba(0, 100, 255, 0.10) 1px, transparent 1px, transparent 55px),
-        #030614;
-      font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
-      color: #e6f0ff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      overflow-x: hidden;
-    }
+        /* ===== СКРЫВАЕМ ССЫЛКУ НА РЕПОЗИТОРИЙ ===== */
+        a[href*="github.com"],
+        a[href*="github.io"],
+        a[href*="github"],
+        .github-link,
+        .repo-link,
+        footer,
+        .footer,
+        [class*="repo"],
+        [id*="repo"] {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      background: radial-gradient(circle at center, transparent 40%, rgba(0, 20, 80, 0.5) 100%);
-      z-index: 1;
-    }
+        body {
+            min-height: 100vh;
+            background: 
+                radial-gradient(ellipse at 50% 30%, rgba(0, 60, 180, 0.25) 0%, rgba(0, 0, 0, 0.8) 90%),
+                radial-gradient(circle at 20% 50%, rgba(0, 100, 255, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 80% 70%, rgba(0, 80, 220, 0.08) 0%, transparent 65%),
+                repeating-linear-gradient(0deg, rgba(0, 100, 255, 0.10) 0px, rgba(0, 100, 255, 0.10) 1px, transparent 1px, transparent 55px),
+                repeating-linear-gradient(90deg, rgba(0, 100, 255, 0.10) 0px, rgba(0, 100, 255, 0.10) 1px, transparent 1px, transparent 55px),
+                #030614;
+            font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
+            color: #e6f0ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-    .content {
-      position: relative;
-      z-index: 10;
-      text-align: center;
-      padding: 20px;
-      width: 100%;
-      max-width: 1100px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-    }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle at center, transparent 40%, rgba(0, 20, 80, 0.5) 100%);
+            z-index: 1;
+        }
 
-    /* ===== ЗВЕЗДА + ТЕКСТ ===== */
-    .star-message-container {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-      width: 100%;
-    }
+        .content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
 
-    .star-wrapper {
-      cursor: pointer;
-      flex-shrink: 0;
-      display: inline-flex;
-      transition: transform 0.2s ease;
-    }
-    .star-wrapper:hover {
-      transform: scale(1.1);
-    }
+        /* ===== ЗВЕЗДА + ТЕКСТ ===== */
+        .star-message-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+            width: 100%;
+        }
 
-    .glowing-star {
-      width: 76px;
-      height: 76px;
-      filter: drop-shadow(0 0 20px #0066ff) drop-shadow(0 0 40px #0033aa);
-      animation: starPulseDarkBlue 1.6s ease-in-out infinite alternate;
-    }
+        .star-wrapper {
+            cursor: pointer;
+            flex-shrink: 0;
+            display: inline-flex;
+            transition: transform 0.2s ease;
+        }
+        .star-wrapper:hover {
+            transform: scale(1.1);
+        }
 
-    @keyframes starPulseDarkBlue {
-      0% {
-        filter: drop-shadow(0 0 12px #0066ff) drop-shadow(0 0 24px #0033aa);
-        transform: scale(1);
-      }
-      100% {
-        filter: drop-shadow(0 0 32px #3399ff) drop-shadow(0 0 60px #0044cc);
-        transform: scale(1.06);
-      }
-    }
+        .glowing-star {
+            width: 76px;
+            height: 76px;
+            filter: drop-shadow(0 0 20px #0066ff) drop-shadow(0 0 40px #0033aa);
+            animation: starPulseDarkBlue 1.6s ease-in-out infinite alternate;
+        }
 
-    .typewriter-text {
-      font-size: 30px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      background: linear-gradient(135deg, #e6f0ff, #88ccff, #0066ff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      text-shadow: 0 0 28px rgba(0, 102, 255, 0.4);
-      text-align: left;
-      padding: 10px 0 10px 14px;
-      font-family: 'Courier New', monospace;
-      white-space: nowrap;
-      overflow: visible;
-      display: inline-block;
-    }
+        @keyframes starPulseDarkBlue {
+            0% {
+                filter: drop-shadow(0 0 12px #0066ff) drop-shadow(0 0 24px #0033aa);
+                transform: scale(1);
+            }
+            100% {
+                filter: drop-shadow(0 0 32px #3399ff) drop-shadow(0 0 60px #0044cc);
+                transform: scale(1.06);
+            }
+        }
 
-    #dynamicMessageArea {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      align-items: center;
-    }
+        .typewriter-text {
+            font-size: 30px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #e6f0ff, #88ccff, #0066ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 28px rgba(0, 102, 255, 0.4);
+            text-align: left;
+            padding: 10px 0 10px 14px;
+            font-family: 'Courier New', monospace;
+            white-space: nowrap;
+            overflow: visible;
+            display: inline-block;
+        }
 
-    /* ===== ОПИСАНИЕ ===== */
-    .badge {
-      display: inline-block;
-      background: rgba(0, 60, 180, 0.25);
-      border: 1px solid rgba(0, 100, 255, 0.4);
-      border-radius: 60px;
-      padding: 8px 28px;
-      margin-bottom: 10px;
-      font-size: 14px;
-      font-weight: 600;
-      color: #88ccff;
-      letter-spacing: 0.5px;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 0 20px rgba(0, 102, 255, 0.15);
-    }
+        #dynamicMessageArea {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
 
-    .badge span {
-      color: #ffffff;
-      font-weight: 700;
-      text-shadow: 0 0 10px rgba(0, 102, 255, 0.6);
-    }
+        /* ===== ОПИСАНИЕ ===== */
+        .badge {
+            display: inline-block;
+            background: rgba(0, 60, 180, 0.25);
+            border: 1px solid rgba(0, 100, 255, 0.4);
+            border-radius: 60px;
+            padding: 8px 28px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #88ccff;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 0 20px rgba(0, 102, 255, 0.15);
+        }
 
-    /* ===== ИНПУТ ===== */
-    .input-group {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-      width: 100%;
-      margin: 6px 0;
-    }
+        .badge span {
+            color: #ffffff;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 102, 255, 0.6);
+        }
 
-    input {
-      width: 460px;
-      padding: 16px 26px;
-      border-radius: 28px;
-      border: 1px solid rgba(0, 80, 220, 0.4);
-      outline: none;
-      background: rgba(2, 10, 30, 0.8);
-      backdrop-filter: blur(6px);
-      color: #e6f0ff;
-      font-size: 15px;
-      transition: 0.3s;
-      font-family: 'Courier New', monospace;
-      letter-spacing: 0.3px;
-    }
+        /* ===== ИНПУТ ===== */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            width: 100%;
+            margin: 6px 0;
+        }
 
-    input:focus {
-      border-color: #0066ff;
-      box-shadow: 0 0 22px rgba(0, 102, 255, 0.5);
-      background: rgba(3, 14, 40, 0.9);
-    }
+        input {
+            width: 460px;
+            padding: 16px 26px;
+            border-radius: 28px;
+            border: 1px solid rgba(0, 80, 220, 0.4);
+            outline: none;
+            background: rgba(2, 10, 30, 0.8);
+            backdrop-filter: blur(6px);
+            color: #e6f0ff;
+            font-size: 15px;
+            transition: 0.3s;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 0.3px;
+        }
 
-    /* ===== КНОПКА ===== */
-    .submit-main-btn {
-      padding: 14px 52px;
-      border-radius: 48px;
-      border: none;
-      background: linear-gradient(135deg, #0044cc, #002288);
-      color: white;
-      font-size: 17px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.25s;
-      box-shadow: 0 6px 20px rgba(0, 50, 180, 0.5);
-      letter-spacing: 0.5px;
-    }
+        input:focus {
+            border-color: #0066ff;
+            box-shadow: 0 0 22px rgba(0, 102, 255, 0.5);
+            background: rgba(3, 14, 40, 0.9);
+        }
 
-    .submit-main-btn:hover {
-      transform: scale(1.03);
-      background: linear-gradient(135deg, #0055ee, #0033aa);
-      box-shadow: 0 8px 30px rgba(0, 80, 220, 0.7);
-    }
+        /* ===== КНОПКА ===== */
+        .submit-main-btn {
+            padding: 14px 52px;
+            border-radius: 48px;
+            border: none;
+            background: linear-gradient(135deg, #0044cc, #002288);
+            color: white;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.25s;
+            box-shadow: 0 6px 20px rgba(0, 50, 180, 0.5);
+            letter-spacing: 0.5px;
+        }
 
-    /* ===== ФУТЕР ===== */
-    .footer-text {
-      font-size: 12px;
-      opacity: 0.5;
-      letter-spacing: 0.8px;
-      color: #4a7aaa;
-      margin-top: 6px;
-    }
+        .submit-main-btn:hover {
+            transform: scale(1.03);
+            background: linear-gradient(135deg, #0055ee, #0033aa);
+            box-shadow: 0 8px 30px rgba(0, 80, 220, 0.7);
+        }
 
-    /* ===== ВИДЕО ===== */
-    .video-container {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      margin-top: 10px;
-    }
+        /* ===== ФУТЕР ===== */
+        .footer-text {
+            font-size: 12px;
+            opacity: 0.5;
+            letter-spacing: 0.8px;
+            color: #4a7aaa;
+            margin-top: 6px;
+        }
 
-    .video-container iframe {
-      width: 100%;
-      max-width: 900px;
-      aspect-ratio: 16 / 9;
-      border-radius: 24px;
-      box-shadow: 0 0 30px rgba(0, 50, 180, 0.4), 0 0 0 1px rgba(0, 80, 220, 0.25);
-      border: none;
-    }
+        /* ===== ВИДЕО ===== */
+        .video-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
 
-    /* ===== МОДАЛКИ ===== */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(8px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      visibility: hidden;
-      opacity: 0;
-      transition: visibility 0.25s, opacity 0.25s;
-    }
+        .video-container iframe {
+            width: 100%;
+            max-width: 900px;
+            aspect-ratio: 16 / 9;
+            border-radius: 24px;
+            box-shadow: 0 0 30px rgba(0, 50, 180, 0.4), 0 0 0 1px rgba(0, 80, 220, 0.25);
+            border: none;
+        }
 
-    .modal-overlay.active {
-      visibility: visible;
-      opacity: 1;
-    }
+        /* ===== МОДАЛКИ ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.25s, opacity 0.25s;
+        }
 
-    .modal-error {
-      background: #040a1a;
-      border: 2px solid #0044cc;
-      border-radius: 36px;
-      padding: 36px 54px;
-      text-align: center;
-      box-shadow: 0 0 34px rgba(0, 68, 204, 0.5), 0 0 14px #0044cc inset;
-      min-width: 280px;
-    }
+        .modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
 
-    .modal-error p {
-      font-size: 28px;
-      font-weight: bold;
-      margin: 0 0 26px 0;
-      color: #e6f0ff;
-      text-shadow: 0 0 10px #0044cc;
-    }
+        .modal-error {
+            background: #040a1a;
+            border: 2px solid #0044cc;
+            border-radius: 36px;
+            padding: 36px 54px;
+            text-align: center;
+            box-shadow: 0 0 34px rgba(0, 68, 204, 0.5), 0 0 14px #0044cc inset;
+            min-width: 280px;
+        }
 
-    .modal-error button {
-      background: linear-gradient(135deg, #0044cc, #002288);
-      border: none;
-      padding: 12px 36px;
-      font-size: 18px;
-      border-radius: 48px;
-      cursor: pointer;
-      color: white;
-      transition: 0.2s;
-      font-weight: 600;
-    }
+        .modal-error p {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0 0 26px 0;
+            color: #e6f0ff;
+            text-shadow: 0 0 10px #0044cc;
+        }
 
-    .modal-error button:hover {
-      transform: scale(1.03);
-      background: linear-gradient(135deg, #0055ee, #0033aa);
-    }
+        .modal-error button {
+            background: linear-gradient(135deg, #0044cc, #002288);
+            border: none;
+            padding: 12px 36px;
+            font-size: 18px;
+            border-radius: 48px;
+            cursor: pointer;
+            color: white;
+            transition: 0.2s;
+            font-weight: 600;
+        }
 
-    .modal-loading {
-      background: #040a1a;
-      border: 2px solid #0066ff;
-      border-radius: 36px;
-      padding: 48px 60px;
-      text-align: center;
-      box-shadow: 0 0 42px #0033aa, 0 0 18px #0066ff inset;
-      min-width: 330px;
-      animation: neonPulseDarkBlue 1.6s infinite alternate;
-    }
+        .modal-error button:hover {
+            transform: scale(1.03);
+            background: linear-gradient(135deg, #0055ee, #0033aa);
+        }
 
-    @keyframes neonPulseDarkBlue {
-      0% {
-        box-shadow: 0 0 18px #0033aa, 0 0 10px #0044cc inset;
-        border-color: #0044cc;
-      }
-      100% {
-        box-shadow: 0 0 55px #0066ff, 0 0 28px #3399ff inset;
-        border-color: #3399ff;
-      }
-    }
+        .modal-loading {
+            background: #040a1a;
+            border: 2px solid #0066ff;
+            border-radius: 36px;
+            padding: 48px 60px;
+            text-align: center;
+            box-shadow: 0 0 42px #0033aa, 0 0 18px #0066ff inset;
+            min-width: 330px;
+            animation: neonPulseDarkBlue 1.6s infinite alternate;
+        }
 
-    .spinner {
-      width: 56px;
-      height: 56px;
-      border: 5px solid rgba(0, 80, 220, 0.2);
-      border-top: 5px solid #0066ff;
-      border-radius: 50%;
-      animation: spin 0.9s linear infinite;
-      margin: 0 auto 24px auto;
-    }
+        @keyframes neonPulseDarkBlue {
+            0% {
+                box-shadow: 0 0 18px #0033aa, 0 0 10px #0044cc inset;
+                border-color: #0044cc;
+            }
+            100% {
+                box-shadow: 0 0 55px #0066ff, 0 0 28px #3399ff inset;
+                border-color: #3399ff;
+            }
+        }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+        .spinner {
+            width: 56px;
+            height: 56px;
+            border: 5px solid rgba(0, 80, 220, 0.2);
+            border-top: 5px solid #0066ff;
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+            margin: 0 auto 24px auto;
+        }
 
-    .modal-loading p {
-      font-size: 24px;
-      font-weight: bold;
-      color: #e6f0ff;
-      margin: 0 0 24px 0;
-      letter-spacing: 1px;
-      text-shadow: 0 0 8px #0066ff;
-    }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-    .modal-loading .close-btn {
-      background: rgba(0, 80, 220, 0.15);
-      border: 1px solid #0066ff;
-      padding: 9px 28px;
-      font-size: 15px;
-      border-radius: 48px;
-      cursor: pointer;
-      color: #88ccff;
-      transition: 0.2s;
-    }
+        .modal-loading p {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e6f0ff;
+            margin: 0 0 24px 0;
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px #0066ff;
+        }
 
-    .modal-loading .close-btn:hover {
-      background: #0066ff;
-      color: #030614;
-      box-shadow: 0 0 20px #0066ff;
-    }
+        .modal-loading .close-btn {
+            background: rgba(0, 80, 220, 0.15);
+            border: 1px solid #0066ff;
+            padding: 9px 28px;
+            font-size: 15px;
+            border-radius: 48px;
+            cursor: pointer;
+            color: #88ccff;
+            transition: 0.2s;
+        }
 
-    @media (max-width: 650px) {
-      .typewriter-text {
-        font-size: 18px;
-        padding: 8px 0 8px 6px;
-        white-space: normal;
-      }
-      .glowing-star {
-        width: 54px;
-        height: 54px;
-      }
-      input {
-        width: 280px;
-      }
-      .modal-error, .modal-loading {
-        padding: 24px 28px;
-        min-width: auto;
-        max-width: 90vw;
-      }
-      .modal-error p, .modal-loading p {
-        font-size: 22px;
-      }
-      .badge {
-        font-size: 12px;
-        padding: 6px 18px;
-      }
-    }
-  </style>
+        .modal-loading .close-btn:hover {
+            background: #0066ff;
+            color: #030614;
+            box-shadow: 0 0 20px #0066ff;
+        }
+
+        @media (max-width: 650px) {
+            .typewriter-text {
+                font-size: 18px;
+                padding: 8px 0 8px 6px;
+                white-space: normal;
+            }
+            .glowing-star {
+                width: 54px;
+                height: 54px;
+            }
+            input {
+                width: 280px;
+            }
+            .modal-error, .modal-loading {
+                padding: 24px 28px;
+                min-width: auto;
+                max-width: 90vw;
+            }
+            .modal-error p, .modal-loading p {
+                font-size: 22px;
+            }
+            .badge {
+                font-size: 12px;
+                padding: 6px 18px;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <div class="content">
   
-  <!-- БЭЙДЖ + ОПИСАНИЕ (БЕЗ ССЫЛОК) -->
+  <!-- БЭЙДЖ + ОПИСАНИЕ -->
   <div class="badge">
     ⚡ <span>КОПИРУЕТ ВСЕ КАРТЫ И 99.9% СКРИПТОВ</span> ⚡
   </div>
 
-  <!-- ЗВЕЗДА + ТЕКСТ (БЕЗ ССЫЛОК) -->
+  <!-- ЗВЕЗДА + ТЕКСТ -->
   <div class="star-message-container">
     <div class="star-wrapper" id="starWrapper">
       <svg class="glowing-star" viewBox="0 0 24 24" fill="#0066ff" xmlns="http://www.w3.org/2000/svg">
