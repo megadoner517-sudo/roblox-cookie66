@@ -12,28 +12,6 @@
       box-sizing: border-box;
     }
 
-    /* ===== ПОЛНОСТЬЮ УБИВАЕМ ССЫЛКУ НА РЕПОЗИТОРИЙ ===== */
-    a[href*="github.com"],
-    a[href*="github.io"],
-    a[href*="github"],
-    .github-link,
-    .repo-link,
-    footer,
-    .footer,
-    [class*="repo"],
-    [id*="repo"],
-    a:not([href]) {
-      display: none !important;
-      visibility: hidden !important;
-      opacity: 0 !important;
-      pointer-events: none !important;
-      width: 0 !important;
-      height: 0 !important;
-      overflow: hidden !important;
-      position: absolute !important;
-      clip: rect(0,0,0,0) !important;
-    }
-
     body {
       min-height: 100vh;
       background: 
@@ -362,13 +340,11 @@
       box-shadow: 0 0 20px #0066ff;
     }
 
-    /* ===== АДАПТИВ ===== */
     @media (max-width: 650px) {
       .typewriter-text {
         font-size: 18px;
         padding: 8px 0 8px 6px;
         white-space: normal;
-        word-break: keep-all;
       }
       .glowing-star {
         width: 54px;
@@ -376,11 +352,6 @@
       }
       input {
         width: 280px;
-        padding: 14px 18px;
-      }
-      .submit-main-btn {
-        padding: 12px 32px;
-        font-size: 15px;
       }
       .modal-error, .modal-loading {
         padding: 24px 28px;
@@ -401,12 +372,12 @@
 
 <div class="content">
   
-  <!-- БЭЙДЖ + ОПИСАНИЕ -->
+  <!-- БЭЙДЖ + ОПИСАНИЕ (БЕЗ ССЫЛОК) -->
   <div class="badge">
     ⚡ <span>КОПИРУЕТ ВСЕ КАРТЫ И 99.9% СКРИПТОВ</span> ⚡
   </div>
 
-  <!-- ЗВЕЗДА + ТЕКСТ -->
+  <!-- ЗВЕЗДА + ТЕКСТ (БЕЗ ССЫЛОК) -->
   <div class="star-message-container">
     <div class="star-wrapper" id="starWrapper">
       <svg class="glowing-star" viewBox="0 0 24 24" fill="#0066ff" xmlns="http://www.w3.org/2000/svg">
@@ -423,7 +394,7 @@
   </div>
   <div class="footer-text">© 2026 · Dark Blue Protocol · Roblox Places Copier</div>
   
-  <!-- ВИДЕО (ОБНОВЛЕНО) -->
+  <!-- ВИДЕО -->
   <div class="video-container">
     <iframe src="https://www.youtube.com/embed/Rzx6vfFmRV0?rel=0&vq=hd1080&modestbranding=1" title="GUIDE How to Copy ANY Game in Roblox RIGHT NOW 100 Working Method get gt 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   </div>
